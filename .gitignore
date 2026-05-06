@@ -1,0 +1,15 @@
+# Carpetas generadas al compilar con Ant
+build/
+dist/
+bin/
+
+# Archivos .class
+*.class
+
+# Configuración privada de NetBeans (rutas absolutas, etc.)
+nbproject/private/
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+*.log
