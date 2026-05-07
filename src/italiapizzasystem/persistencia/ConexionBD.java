@@ -14,14 +14,13 @@ import java.util.Properties;
  */
 public class ConexionBD {
     private static final String ARCHIVO_CONFIG = "config.properties";
-    private static final String DRIVER = "com.mysql.jdbc.Driver" ; //Sirve para la forma de acceso 
+    private static final String DRIVER = "com.mysql.jdbc.Driver" ;
     
     public static Connection abrirConexion(){
         Connection conexionBD = null; 
         Properties propiedades = new Properties();
         try(InputStream entrada = new FileInputStream(ARCHIVO_CONFIG)){ 
             propiedades.load(entrada);
-            //El porcentaje que hay en mi cadena de argumentos es para indicar que ahí va un argumento
             String urlConexion = String.format("jdbc:mysql://%s:%s/%s?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
                     propiedades.getProperty("db.ip"),
                     propiedades.getProperty("db.puerto"),
@@ -31,7 +30,7 @@ public class ConexionBD {
                                                     propiedades.getProperty("db.contrasenia"));
         }catch (IOException e) {
             System.err.println("Error al leer el archivo de configuración: " + e.getMessage());
-        }catch(ClassNotFoundException e){ //ó catch(ClassNotFoundException e || SQLException) 
+        }catch(ClassNotFoundException e){
             e.printStackTrace();
             System.err.printf("Error, Clase no encontrada");
         }catch(SQLException s){

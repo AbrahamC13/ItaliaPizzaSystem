@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLLoginController">
+   <children>
+      <AnchorPane prefHeight="100.0" prefWidth="400.0">
+         <children>
+            <Label layoutX="99.0" layoutY="45.0" text="Inicio de Sesión">
+               <font>
+                  <Font name="Times New Roman" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-4.0" layoutY="113.0" prefHeight="213.0" prefWidth="400.0">
+         <children>
+            <PasswordField fx:id="pfContraseniaUsuario" layoutX="120.0" layoutY="116.0" />
+            <TextField fx:id="tfNombreUsuario" layoutX="120.0" layoutY="38.0" />
+            <Label layoutX="138.0" layoutY="8.0" text="Ingrese su usuario:" />
+            <Label layoutX="139.0" layoutY="87.0" text="Ingrese su contraseña:" />
+            <Button layoutX="185.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnEntrar" text="Entrar" />
+            <Label fx:id="lbCampoUsuario" layoutX="131.0" layoutY="69.0" prefHeight="21.0" prefWidth="167.0" textFill="RED" />
+            <Label fx:id="lbCampoContrasenia" layoutX="131.0" layoutY="147.0" prefHeight="21.0" prefWidth="167.0" textFill="RED" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
