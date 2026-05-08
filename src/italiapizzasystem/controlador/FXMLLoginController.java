@@ -1,13 +1,17 @@
 package italiapizzasystem.controlador;
 import italiapizzasystem.persistencia.ConexionBD;
 import italiapizzasystem.persistencia.dao.EmpleadoDAO;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -66,9 +70,12 @@ public class FXMLLoginController implements Initializable {
         
     }
     
-    private void validarUsuario(String username, String password) throws SQLException{
+    private void validarUsuario(String username, String password) throws SQLException, IOException{
         if(EmpleadoDAO.validarCredenciales(username, password) == 1){
             //Caambiamos la ventana al menú principal 
+            //Parent root = FXMLLoader.load(getClass().getResource("vista/FXMLLogin.fxml"));
+            //Scene scene = new Scene(root);
+            //stage.setScene(scene);
         }
     }
     
