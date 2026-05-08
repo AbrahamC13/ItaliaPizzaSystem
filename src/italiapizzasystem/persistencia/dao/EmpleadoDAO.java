@@ -70,4 +70,22 @@ public class EmpleadoDAO {
         empleado.setContrasenia(resultado.getString("contrasenia"));
         return empleado;
     }
+    
+    public static int validarCredenciales(String username, String password) throws SQLException{
+        int empleadoEncontrado = 0;
+        Connection conexionBD= ConexionBD.abrirConexion();
+        if(conexionBD != null){
+            String consulta = "SELECT usuario, contrasenia FROM empleado WHERE usuario = ? AND contrasenia = ?";
+            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
+            ResultSet resultado = sentencia.executeQuery();
+            while(resultado.next()){
+                serializarEmpleado(resultado);
+                empleadoEncontrado = 1;
+            }
+            conexionBD.close();
+            sentencia.close();
+            resultado.close();
+        }
+        return empleadoEncontrado;
+    }
 }

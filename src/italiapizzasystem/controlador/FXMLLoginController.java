@@ -1,5 +1,9 @@
 package italiapizzasystem.controlador;
+import italiapizzasystem.persistencia.ConexionBD;
+import italiapizzasystem.persistencia.dao.EmpleadoDAO;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +40,14 @@ public class FXMLLoginController implements Initializable {
         lbCampoUsuario.setText("");
         lbCampoContrasenia.setText("");
         if(validarCamposLlenos()){
+            try{
+                validarUsuario(tfNombreUsuario.getText(), pfContraseniaUsuario.getText());
+            }catch(SQLException ex){
+                System.console().printf("Error al conectarse a la base de datos", ex);
+            }
+            catch(Exception ex){
+                System.console().printf("Error general. ", ex);
+            }
             
         }
     }
@@ -52,6 +64,12 @@ public class FXMLLoginController implements Initializable {
         }
             return camposLlenos;
         
+    }
+    
+    private void validarUsuario(String username, String password) throws SQLException{
+        if(EmpleadoDAO.validarCredenciales(username, password) == 1){
+            //Caambiamos la ventana al menú principal 
+        }
     }
     
 }
