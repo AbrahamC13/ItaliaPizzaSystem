@@ -14,12 +14,12 @@ import java.util.Properties;
  */
 public class ConexionBD {
     private static final String ARCHIVO_CONFIG = "config.properties";
-    private static final String DRIVER = "com.mysql.jdbc.Driver" ;
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver" ;
     
     public static Connection abrirConexion(){
         Connection conexionBD = null; 
         Properties propiedades = new Properties();
-        try(InputStream entrada = new FileInputStream(ARCHIVO_CONFIG)){ 
+        try(InputStream entrada = ConexionBD.class.getClassLoader().getResourceAsStream("config.properties")){ 
             propiedades.load(entrada);
             String urlConexion = String.format("jdbc:mysql://%s:%s/%s?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
                     propiedades.getProperty("db.ip"),

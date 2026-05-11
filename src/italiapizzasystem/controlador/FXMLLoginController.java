@@ -1,4 +1,5 @@
 package italiapizzasystem.controlador;
+import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.ConexionBD;
 import italiapizzasystem.persistencia.dao.EmpleadoDAO;
 import italiapizzasystem.persistencia.pojo.Empleado;
@@ -83,8 +84,10 @@ public class FXMLLoginController implements Initializable {
             }
         }catch(SQLException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());
+            ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            ex.printStackTrace();
         }
         
     }
@@ -94,17 +97,24 @@ public class FXMLLoginController implements Initializable {
         //casteo: solicitud explicita a Java para cambiar un tipo de dato a otro
         Stage escenarioBase = (Stage) tfNombreUsuario.getScene().getWindow(); //A partir de mi componente tfUsuario puedo obtenr la escena en donde está
         //FXMLLoader cargador = new FXMLLoader(italiapizzasystem.class.getResource("vista/FXMLMenuPrincipal.fxml"));//Lo que está adentro del paréntesis funsiona como url
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("/vista/FXMLMenuPrincipal.fxml"));
+        FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLMenuPrincipal.fxml"));
         //La variable FXMLLoader me permite manipular el controlador 
         Parent vista = cargador.load();//Aquí innicio la vista 
         FXMLMenuPrincipalController controlador = cargador.getController();
-        //controlador.inicializarInformacion(empleado);
+        controlador.inicializarInformacion(empleado);
         Scene escenaPrincipal = new Scene(vista);
         escenarioBase.setScene(escenaPrincipal);
         escenarioBase.setTitle("Pantalla principal.");
-        escenarioBase.showAndWait();
-        }catch (IOException e){
-            e.printStackTrace();
+        escenarioBase.show();
+        }catch (IOException ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al redirigirse al menú. ", ex.getMessage());
+            ex.printStackTrace();
+        }catch(IllegalStateException ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al redirigirse al menú", ex.getMessage());
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error no gestionado", ex.getMessage());
+            ex.printStackTrace();
         }
     }
     
