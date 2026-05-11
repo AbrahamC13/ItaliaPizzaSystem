@@ -9,6 +9,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +42,9 @@ public class FXMLLoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         Platform.runLater(() -> {
+        tfNombreUsuario.requestFocus();
+        });
         // TODO
         Connection conexionBD = ConexionBD.abrirConexion();
         if(conexionBD==null){

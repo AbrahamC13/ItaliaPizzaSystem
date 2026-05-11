@@ -20,8 +20,8 @@
       </AnchorPane>
       <AnchorPane layoutX="-4.0" layoutY="113.0" prefHeight="213.0" prefWidth="400.0">
          <children>
-            <PasswordField fx:id="pfContraseniaUsuario" layoutX="120.0" layoutY="116.0" />
             <TextField fx:id="tfNombreUsuario" layoutX="120.0" layoutY="38.0" />
+            <PasswordField fx:id="pfContraseniaUsuario" layoutX="120.0" layoutY="116.0" />
             <Label layoutX="138.0" layoutY="8.0" text="Ingrese su usuario:" />
             <Label layoutX="139.0" layoutY="87.0" text="Ingrese su contraseña:" />
             <Button layoutX="185.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnEntrar" text="Entrar" />
