@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
  *
  * @author Gerardo
  */
-public class FXMLRegistrarProductoController implements Initializable {
+public class FXMLActualizarProductoController implements Initializable {
 
     @FXML
     private TextField tfNombre;
@@ -24,10 +24,6 @@ public class FXMLRegistrarProductoController implements Initializable {
     @FXML
     private TextArea taRestricciones;
     @FXML
-    private TextField tfPrecio;
-    @FXML
-    private TextField tfCantidad;
-    @FXML
     private Label lbCamposInvalidos;
     @FXML
     private Label lbNombreInvalido;
@@ -35,6 +31,10 @@ public class FXMLRegistrarProductoController implements Initializable {
     private Label lbDescripcionInvalido;
     @FXML
     private Label lbRestriccionInvalida;
+    @FXML
+    private TextField tfPrecio;
+    @FXML
+    private TextField tfCantidad;
     @FXML
     private Label lbPrecioInvalido;
     @FXML
@@ -49,7 +49,7 @@ public class FXMLRegistrarProductoController implements Initializable {
     }    
 
     @FXML
-    private void btnClicCancelarRegistro(ActionEvent event) {
+    private void btnClicCancelar(ActionEvent event) {
     }
 
     @FXML
@@ -57,7 +57,11 @@ public class FXMLRegistrarProductoController implements Initializable {
     }
 
     @FXML
-    private void btnClicRegistrarProducto(ActionEvent event) {
+    private void btnClicActualizarDatos(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnClicEliminarProducto(ActionEvent event) {
     }
     
 }

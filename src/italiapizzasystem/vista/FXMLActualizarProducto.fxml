@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLRegistrarProductoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLActualizarProductoController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="309.0">
          <children>
@@ -22,7 +22,7 @@
             <TextArea fx:id="taDescripcion" layoutX="19.0" layoutY="167.0" prefHeight="58.0" prefWidth="257.0" promptText="Breve descripción del producto" />
             <Label layoutX="21.0" layoutY="244.0" text="Restricciones:" />
             <TextArea fx:id="taRestricciones" layoutX="19.0" layoutY="273.0" prefHeight="58.0" prefWidth="257.0" promptText="Restricciones del producto" />
-            <Button layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnClicCancelarRegistro" text="Cancelar registro" />
+            <Button layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnClicCancelar" text="Cancelar " />
             <Label fx:id="lbCamposInvalidos" layoutX="100.0" layoutY="62.0" prefHeight="21.0" prefWidth="175.0" textFill="RED" />
             <Label fx:id="lbNombreInvalido" layoutX="9.0" layoutY="88.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
                <font>
@@ -49,7 +49,7 @@
             <TextField fx:id="tfCantidad" layoutX="99.0" layoutY="174.0" prefHeight="31.0" prefWidth="134.0" promptText="#" />
             <Label layoutX="27.0" layoutY="236.0" text="Foto del producto:" />
             <Button layoutX="35.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnClicSubirArchivo" text="Subir archivo" />
-            <Button layoutX="133.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnClicRegistrarProducto" text="Registrar producto" />
+            <Button layoutX="168.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnClicActualizarDatos" text="Actualizar datos" />
             <Label fx:id="lbPrecioInvalido" layoutX="12.0" layoutY="89.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
                <font>
                   <Font size="25.0" />
@@ -60,6 +60,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
+            <Button layoutX="13.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnClicEliminarProducto" text="Eliminar producto" />
          </children>
       </AnchorPane>
    </children>
