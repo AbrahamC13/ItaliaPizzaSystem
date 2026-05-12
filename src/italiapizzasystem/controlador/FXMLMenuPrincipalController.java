@@ -92,6 +92,22 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnClicPedidos(ActionEvent event) {
+        try {
+            Stage escenarioBase = (Stage) lbEmpleado.getScene().getWindow();
+            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLPedidos.fxml"));
+            Parent vista = cargador.load();
+            FXMLPedidosController controlador = cargador.getController();
+            Scene escenaPedidos = new Scene(vista);
+            escenarioBase.setScene(escenaPedidos);
+            escenarioBase.setTitle("Pedidos.");
+            escenarioBase.show();
+        } catch (IOException ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al acceder a la página.", ex.getMessage());
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            ex.printStackTrace();
+        }
     }
     
 }
