@@ -85,6 +85,8 @@ public class FXMLLoginController implements Initializable {
             if(empleadoAutenticado!= null){
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Credenciales correctas", "Bienvenido(a): "+empleadoAutenticado.getNombre());
                 irPantallaPrincipal(empleadoAutenticado);
+            }else{
+                Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION,"Credenciales incorrectas", "Porfavor, verifique la información ingresada.");
             }
         }catch(SQLException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());
@@ -108,7 +110,7 @@ public class FXMLLoginController implements Initializable {
         controlador.inicializarInformacion(empleado);
         Scene escenaPrincipal = new Scene(vista);
         escenarioBase.setScene(escenaPrincipal);
-        escenarioBase.setTitle("Pantalla principal.");
+        escenarioBase.setTitle("Menú Principal.");
         escenarioBase.show();
         }catch (IOException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al redirigirse al menú. ", ex.getMessage());

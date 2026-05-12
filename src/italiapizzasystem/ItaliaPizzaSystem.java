@@ -20,7 +20,6 @@ public class ItaliaPizzaSystem extends Application {
        Parent root = FXMLLoader.load(getClass().getResource("vista/FXMLLogin.fxml"));
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);  
         stage.show();
     }
