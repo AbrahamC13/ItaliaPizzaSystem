@@ -1,5 +1,6 @@
 package italiapizzasystem.persistencia.dao;
 
+import italiapizzasystem.excepciones.ValidarCredencialesException;
 import italiapizzasystem.persistencia.ConexionBD;
 import italiapizzasystem.persistencia.pojo.Empleado;
 import java.sql.Connection;
@@ -71,7 +72,7 @@ public class EmpleadoDAO {
         return empleado;
     }
     
-    public static Empleado validarCredenciales(String usuario, String contrasenia) throws SQLException{
+    public static Empleado validarCredenciales(String usuario, String contrasenia) throws SQLException, ValidarCredencialesException{
         Connection conexionBD= ConexionBD.abrirConexion();
         Empleado empleado = null;
         if(conexionBD != null){
@@ -80,12 +81,16 @@ public class EmpleadoDAO {
             sentencia.setString(1,usuario);
             sentencia.setString(2,contrasenia);
             ResultSet resultado = sentencia.executeQuery();
-            while(resultado.next()){
+            if(resultado.next()){
                 empleado = serializarEmpleado(resultado);
+            }else{
+                throw new ValidarCredencialesException("Error al validar credenciales");
             }
             conexionBD.close();
             sentencia.close();
             resultado.close();
+        }else{
+            throw new SQLException("Error al conectarse a la base de datos.");
         }
         return empleado;
     }

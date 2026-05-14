@@ -1,5 +1,6 @@
 package italiapizzasystem.controlador;
 import italiapizzasystem.ItaliaPizzaSystem;
+import italiapizzasystem.excepciones.ValidarCredencialesException;
 import italiapizzasystem.persistencia.ConexionBD;
 import italiapizzasystem.persistencia.dao.EmpleadoDAO;
 import italiapizzasystem.persistencia.pojo.Empleado;
@@ -39,6 +40,20 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private PasswordField pfContraseniaUsuario;
+    //Restricción de credenciales
+    private static final int LONGITUD_MINIMA_CREDENCIALES = 5;
+    private static final int LONGITUD_MAXIMA_CREDENCIALES = 45;
+    //Prevención de inyecciones sql
+    // Regex para username: letras, números, punto, guión bajo. Nada más.
+    private static final String USUARIO_REGEX = "^[a-zA-Z0-9._]{3,45}$";
+    // Regex para contraseña fuerte:
+    // - Al menos 5 caracteres
+    // - Al menos una mayúscula
+    // - Al menos una minúscula
+    // - Al menos un dígito
+    private static final String CONTRASENIA_STRONG_REGEX = 
+        "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{5,45}$";
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,7 +75,8 @@ public class FXMLLoginController implements Initializable {
     void btnEntrar(ActionEvent event) {
         lbCampoUsuario.setText("");
         lbCampoContrasenia.setText("");
-        if(validarCamposLlenos()){     
+        if(validarCamposLlenos() && validarLongitudCampos(tfNombreUsuario.getText(), pfContraseniaUsuario.getText())
+                && validarFormatoCampos(tfNombreUsuario.getText(), pfContraseniaUsuario.getText())){     
             validarUsuario(tfNombreUsuario.getText(), pfContraseniaUsuario.getText());   
         }
     }
@@ -79,6 +95,40 @@ public class FXMLLoginController implements Initializable {
         
     }
     
+    private boolean validarLongitudCampos(String usuario, String contrasenia){
+        boolean resultado = true;
+        int longitudUsuario = usuario.trim().length();  // trim() evita contar solo espacios
+        int longitudContrasenia = contrasenia.length();     // La contraseña suele conservar espacios
+        
+        // Usuario: al menos 1 caracter, máximo 45
+        // Contraseña: permitir 0? Normalmente no, pero ajusta según tu caso
+        if (longitudUsuario < LONGITUD_MINIMA_CREDENCIALES || longitudUsuario > LONGITUD_MAXIMA_CREDENCIALES) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR,"Error", "El usuario debe tener entre 5 y 45 caracteres.");
+            resultado= false;
+        }
+    
+        if (longitudContrasenia < LONGITUD_MINIMA_CREDENCIALES || longitudContrasenia > LONGITUD_MAXIMA_CREDENCIALES ) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "La contraseña debe tener entre 5 y 45 caracteres.");
+            resultado= false;
+        }
+        return resultado;
+    }
+    
+    private boolean validarFormatoCampos(String usuario, String contrasenia){
+        boolean resultado = true;
+        if (!usuario.matches(USUARIO_REGEX)) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido", 
+                "El usuario solo puede contener letras, números, puntos y guiones bajos. Sin espacios ni caracteres especiales.");
+            resultado = false;
+        }
+        if (!contrasenia.matches(CONTRASENIA_STRONG_REGEX)) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido", 
+                "La contraseña debe tener al menos una mayúscula, una minúscula y un número.");
+            resultado = false;
+        }
+        return resultado;
+    }
+    
     private void validarUsuario(String username, String password) {
         try{
             Empleado empleadoAutenticado = EmpleadoDAO.validarCredenciales(username, password);
@@ -89,7 +139,10 @@ public class FXMLLoginController implements Initializable {
             }else{
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION,"Credenciales incorrectas", "Porfavor, verifique la información ingresada.");
             }
-        }catch(SQLException ex){
+        }catch(ValidarCredencialesException ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al validar credenciales", ex.getMessage());
+        }
+        catch(SQLException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());
             ex.printStackTrace();
         }catch(Exception ex){
