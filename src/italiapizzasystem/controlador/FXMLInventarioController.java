@@ -5,6 +5,8 @@ import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,7 @@ public class FXMLInventarioController implements Initializable {
 
     @FXML
     private TextField tfNombreProducto;
-
+     private static final Logger LOGGER = Logger.getLogger(FXMLInventarioController.class.getName());
     /**
      * Initializes the controller class.
      */
@@ -54,9 +56,11 @@ public class FXMLInventarioController implements Initializable {
             escenarioBase.show();
         } catch (IOException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al volver al menú principal.", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLMenuPrincipal", ex);
             ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en btnClicRegresar", ex);
             ex.printStackTrace();
         }
     }

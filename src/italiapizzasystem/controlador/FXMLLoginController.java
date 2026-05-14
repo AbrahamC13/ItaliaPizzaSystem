@@ -10,6 +10,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,17 +45,12 @@ public class FXMLLoginController implements Initializable {
     //Restricción de credenciales
     private static final int LONGITUD_MINIMA_CREDENCIALES = 5;
     private static final int LONGITUD_MAXIMA_CREDENCIALES = 45;
+    private static final Logger LOGGER = Logger.getLogger(FXMLLoginController.class.getName());
     //Prevención de inyecciones sql
     // Regex para username: letras, números, punto, guión bajo. Nada más.
     private static final String USUARIO_REGEX = "^[a-zA-Z0-9._]{3,45}$";
-    // Regex para contraseña fuerte:
-    // - Al menos 5 caracteres
-    // - Al menos una mayúscula
-    // - Al menos una minúscula
-    // - Al menos un dígito
-    private static final String CONTRASENIA_STRONG_REGEX = 
-        "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{5,45}$";
-    
+    // Regex para contraseña fuerte: Al menos 5 caracteres, al menos una mayúscula, Al menos una minúscula, Al menos un dígito
+    private static final String CONTRASENIA_STRONG_REGEX =  "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{5,45}$";
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,11 +60,8 @@ public class FXMLLoginController implements Initializable {
         // TODO
         Connection conexionBD = ConexionBD.abrirConexion();
         if(conexionBD==null){
-            Alert alerta;
-            alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("Error al conectar a la BD");
-            alerta.show();
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Error", "Error al conectar a la BD");
+            
         }
     }  
 
@@ -141,12 +135,15 @@ public class FXMLLoginController implements Initializable {
             }
         }catch(ValidarCredencialesException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al validar credenciales", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al ingresar, el usuario usó claves incorrectas", ex);
         }
         catch(SQLException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar la bd en el método validarUsuario", ex);
             ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en validarUsuario", ex);
             ex.printStackTrace();
         }
         
@@ -168,12 +165,15 @@ public class FXMLLoginController implements Initializable {
         escenarioBase.show();
         }catch (IOException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al redirigirse al menú. ", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLMenuPrincipal", ex);
             ex.printStackTrace();
         }catch(IllegalStateException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al redirigirse al menú", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLMenuPrincipal", ex);
             ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error no gestionado", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en irPantallaPrincipal", ex);
             ex.printStackTrace();
         }
     }

@@ -29,6 +29,7 @@ public class FXMLMenuPrincipalController implements Initializable {
      * Initializes the controller class.
      */
     private Empleado empleado;
+    private static final Logger LOGGER = Logger.getLogger(FXMLMenuPrincipalController.class.getName());
     @FXML
     private Label lbEmpleado;
     @Override
@@ -54,9 +55,11 @@ public class FXMLMenuPrincipalController implements Initializable {
             escenarioBase.show();
         } catch (IOException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al cerrar sesión.", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLLogin", ex);
             ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en la función btnClicCerrarSesion", ex);
             ex.printStackTrace();
         }
     }
@@ -100,9 +103,11 @@ public class FXMLMenuPrincipalController implements Initializable {
             escenarioBase.show();
         } catch (IOException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al acceder a la página.", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLInventario ", ex);
             ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en la función btnClicInventarios", ex);
             ex.printStackTrace();
         }
         
@@ -121,9 +126,11 @@ public class FXMLMenuPrincipalController implements Initializable {
             escenarioBase.show();
         } catch (IOException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al acceder a la página.", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLPedidos ", ex);
             ex.printStackTrace();
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en la función btnClicPedidos ", ex);
             ex.printStackTrace();
         }
     }
