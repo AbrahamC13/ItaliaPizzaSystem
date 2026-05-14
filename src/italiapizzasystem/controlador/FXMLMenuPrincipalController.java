@@ -67,6 +67,24 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnClicAyuda(ActionEvent event) {
+        Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "✨ Información del Sistema ✨",
+                "╔════════════════════════════════════════╗\n" +
+                "║  👥 EQUIPO DE DESARROLLO               ║\n" +
+                "╠════════════════════════════════════════╣\n" +
+                "║  ♣ Gerardo Abraham Barrón Gómez ♣      ║\n" +
+                "║  ♕ Abraham Cano Ramírez ♕            ║\n" +
+                "║  ♣ Javier Yajseel Lily Reyes ♣         ║\n" +
+                "║  ♣ Leonardo [Apellido] ♣               ║\n" +
+                "╠════════════════════════════════════════╣\n" +
+                "║         📚 CARRERA EN CURSO            ║\n" +
+                "║     Ingeniería de Software             ║\n" +
+                "╠════════════════════════════════════════╣\n" +
+                "║          🎓 SEMESTRES                  ║\n" +
+                "║           4to y 6to                    ║\n" +
+                "╠════════════════════════════════════════╣\n" +
+                "║    🏫 INSTITUCIÓN EDUCATIVA            ║\n" +
+                "║     Universidad Veracruzana            ║\n" +
+                "╚════════════════════════════════════════╝");
     }
 
     @FXML

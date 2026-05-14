@@ -7,26 +7,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLLoginController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLLoginController">
    <children>
-      <AnchorPane prefHeight="100.0" prefWidth="400.0">
+      <AnchorPane prefHeight="66.0" prefWidth="400.0">
          <children>
-            <Label layoutX="99.0" layoutY="45.0" text="Inicio de Sesión">
+            <Label layoutX="97.0" layoutY="25.0" text="Inicio de Sesión">
                <font>
                   <Font name="Times New Roman" size="32.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-4.0" layoutY="113.0" prefHeight="213.0" prefWidth="400.0">
+      <AnchorPane layoutX="-4.0" layoutY="81.0" prefHeight="269.0" prefWidth="407.0">
          <children>
-            <TextField fx:id="tfNombreUsuario" layoutX="120.0" layoutY="38.0" />
-            <PasswordField fx:id="pfContraseniaUsuario" layoutX="120.0" layoutY="116.0" />
-            <Label layoutX="138.0" layoutY="8.0" text="Ingrese su usuario:" />
-            <Label layoutX="139.0" layoutY="87.0" text="Ingrese su contraseña:" />
-            <Button layoutX="185.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnEntrar" text="Entrar" />
-            <Label fx:id="lbCampoUsuario" layoutX="131.0" layoutY="69.0" prefHeight="21.0" prefWidth="167.0" textFill="RED" />
-            <Label fx:id="lbCampoContrasenia" layoutX="131.0" layoutY="147.0" prefHeight="21.0" prefWidth="167.0" textFill="RED" />
+            <TextField fx:id="tfNombreUsuario" layoutX="110.0" layoutY="45.0" prefHeight="31.0" prefWidth="207.0" />
+            <PasswordField fx:id="pfContraseniaUsuario" layoutX="109.0" layoutY="148.0" prefHeight="31.0" prefWidth="207.0" />
+            <Label layoutX="111.0" layoutY="19.0" text="Ingrese su usuario:" />
+            <Label layoutX="110.0" layoutY="109.0" text="Ingrese su contraseña:" />
+            <Button layoutX="185.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnEntrar" text="Entrar" />
+            <Label fx:id="lbCampoUsuario" layoutX="130.0" layoutY="81.0" prefHeight="21.0" prefWidth="167.0" textFill="RED" />
+            <Label fx:id="lbCampoContrasenia" layoutX="132.0" layoutY="179.0" prefHeight="21.0" prefWidth="167.0" textFill="RED" />
+            <Hyperlink layoutX="198.0" layoutY="124.0" onAction="#hpClicContraseñaOlvidada" text="¿Olvidaste tu contraseña?">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
          </children>
       </AnchorPane>
    </children>

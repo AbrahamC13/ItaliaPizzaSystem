@@ -177,5 +177,10 @@ public class FXMLLoginController implements Initializable {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    private void hpClicContraseñaOlvidada(ActionEvent event) {
+        
+    }
     
 }

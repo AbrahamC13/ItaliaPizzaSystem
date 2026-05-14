@@ -17,6 +17,7 @@ public class Utilidad {
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(contenido);
+        alerta.getDialogPane().setStyle("-fx-font-family: 'Consolas'; -fx-font-size: 13px;");
         alerta.showAndWait();
     }
     
