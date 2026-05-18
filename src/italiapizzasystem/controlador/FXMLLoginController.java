@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -23,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 /**
@@ -91,11 +94,9 @@ public class FXMLLoginController implements Initializable {
     
     private boolean validarLongitudCampos(String usuario, String contrasenia){
         boolean resultado = true;
-        int longitudUsuario = usuario.trim().length();  // trim() evita contar solo espacios
-        int longitudContrasenia = contrasenia.length();     // La contraseña suele conservar espacios
+        int longitudUsuario = usuario.trim().length();  
+        int longitudContrasenia = contrasenia.length();     
         
-        // Usuario: al menos 1 caracter, máximo 45
-        // Contraseña: permitir 0? Normalmente no, pero ajusta según tu caso
         if (longitudUsuario < LONGITUD_MINIMA_CREDENCIALES || longitudUsuario > LONGITUD_MAXIMA_CREDENCIALES) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR,"Error", "El usuario debe tener entre 5 y 45 caracteres.");
             resultado= false;
@@ -180,7 +181,52 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void hpClicContraseñaOlvidada(ActionEvent event) {
-        
+        TextInputDialog dialogo = new TextInputDialog();
+        dialogo.setTitle("Recuperar Contraseña");
+        dialogo.setHeaderText("Restablecer credenciales de acceso");
+        dialogo.setContentText("Ingresa tu nombre de usuario o correo electrónico:");
+
+        // Obtener el Stage actual para centrar el diálogo
+        Stage stage = (Stage) tfNombreUsuario.getScene().getWindow();
+        dialogo.initOwner(stage);
+
+        Optional<String> resultado = dialogo.showAndWait();
+
+        // Si el usuario presionó "Aceptar"
+        resultado.ifPresent(new java.util.function.Consumer<String>() {
+            @Override
+            public void accept(String identificador) {
+                String input = identificador.trim();
+                if (input.isEmpty()) {
+                    Utilidad.mostrarAlertaSimple(Alert.AlertType.WARNING, "Campo vacío", "Debe ingresar un usuario o correo.");
+                    return;
+                }
+
+                String contrasenia = null;
+                boolean ocurrioError = false; // Bandera para controlar el flujo si falla la BD
+
+                try {
+                    contrasenia = EmpleadoDAO.recuperarYEnviarcontrasenia(input);
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error en la base de datos al recuperar clave", ex);
+                    Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "No se pudo conectar a la base de datos.");
+                    ocurrioError = true; // Marcamos que hubo un error
+                } 
+
+                // Solo evaluamos el resultado si la consulta a la BD no falló
+                if (!ocurrioError) {
+                    if (contrasenia != null) {
+                        Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Información",
+                                "Contraseña registrada: " + contrasenia);
+                    } else {
+                        Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "No encontrado", 
+                                "No se encontró ningún usuario o correo registrado con esos datos.");
+                    }   
+                }
+            }
+        });
     }
-    
 }
+    
+    
+

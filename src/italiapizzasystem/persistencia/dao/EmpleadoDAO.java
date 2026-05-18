@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -93,5 +94,30 @@ public class EmpleadoDAO {
             throw new SQLException("Error al conectarse a la base de datos.");
         }
         return empleado;
+    }
+    
+    public static String recuperarYEnviarcontrasenia(String identificador) throws SQLException{
+        String contraseniaEncontrada = "";
+        String queryBusqueda = "SELECT contrasenia FROM empleado WHERE usuario  = ? OR email = ?";
+        
+        Connection conexion = ConexionBD.abrirConexion();
+        if (conexion == null) {
+            throw new SQLException("No se pudo establecer conexión con la base de datos.");
+        }
+        
+        try (PreparedStatement stmtBusqueda = conexion.prepareStatement(queryBusqueda)) {
+            stmtBusqueda.setString(1, identificador);
+            stmtBusqueda.setString(2, identificador);
+            
+            try (ResultSet rs = stmtBusqueda.executeQuery()) {
+                if (rs.next()) {
+                    contraseniaEncontrada = rs.getString("contrasenia");
+                }
+            }
+        } finally {
+            conexion.close(); 
+        }
+        return contraseniaEncontrada;
+    
     }
 }
