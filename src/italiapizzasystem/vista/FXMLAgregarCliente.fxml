@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLAgregarClienteController">
+   <children>
+      <VBox alignment="CENTER" layoutX="93.0" layoutY="-12.0" prefHeight="673.0" prefWidth="313.0" spacing="20.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <Label text="Agregar Usuario">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="613.0" prefWidth="273.0" spacing="8.0" style="-fx-border-color: #cccccc; -fx-border-radius: 5;">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Nombre(s):" />
+                  <TextField fx:id="tfNombre" />
+                  <Label text="Apellido paterno:" />
+                  <TextField fx:id="tfApellidoPaterno" />
+                  <Label text="Apellido materno:" />
+                  <TextField fx:id="tfApellidoMaterno" />
+                  <Label text="Teléfono:" />
+                  <TextField fx:id="tfTelefono" />
+                  <Label text="Email:" />
+                  <TextField fx:id="tfEmail" />
+                  <Label text="Dirección:" />
+                  <TextField fx:id="tfDireccion" />
+                  <Label text="Código Postal:" />
+                  <TextField fx:id="tfCodigoPostal" />
+                  <Label text="Ciudad:" />
+                  <TextField fx:id="tfCiudad" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnClicCancelar" text="Cancelar" />
+                        <Button mnemonicParsing="false" onAction="#btnClicGuardar" text="Guardar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
