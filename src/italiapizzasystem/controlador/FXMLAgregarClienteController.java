@@ -6,6 +6,7 @@ import italiapizzasystem.persistencia.pojo.Cliente;
 import italiapizzasystem.utilidad.Utilidad;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class FXMLAgregarClienteController implements Initializable {
     private TextField tfCodigoPostal;
     @FXML
     private TextField tfCiudad;
-    private static final Logger LOGGER = Logger.getLogger(FXMLLoginController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FXMLAgregarClienteController.class.getName());
      //Restricción de campos
     public static final int NOMBRE_MAX = 45;
     public static final int APATERNO_MAX = 45;
@@ -75,8 +76,8 @@ public class FXMLAgregarClienteController implements Initializable {
 
     @FXML
     private void btnClicGuardar(ActionEvent event) {
-        if(validarCamposVacios() && validarLongitudCampos() && validarFormatoCampos()){
-            validarClienteExistente();
+        if(validarCamposVacios() && validarLongitudCampos() && validarFormatoCampos() && validarClienteExistente()){
+            registrarCliente();
         }else{
             return;
         }
@@ -228,13 +229,48 @@ public class FXMLAgregarClienteController implements Initializable {
         return resultado;
     }
     
-    private void validarClienteExistente(){
+    private boolean validarClienteExistente(){
+        boolean resultado = false;
         try{
-            //Cliente clienteValidado = ClienteDAO
+            resultado = ClienteDAO.validarClienteExistente(tfEmail.getText());//Devuelve true si encuentra un usuario registrado
+            if(resultado){
+              Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Información existente", "El correo ingresado ya "
+                      + "está registrado, por favor intente con otro");
+            } 
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error general capturado en validarUsuario", ex);
+            LOGGER.log(Level.SEVERE, "Error general capturado en validarClienteExistente", ex);
+            ex.printStackTrace();
+        }
+        return resultado;
+    }
+    
+    private void registrarCliente(){
+        boolean resultado = false;
+        Cliente cliente = new Cliente();
+        cliente.setNombre(tfNombre.getText());
+        cliente.setaPaterno(tfApellidoPaterno.getText());
+        cliente.setaMaterno(tfApellidoMaterno.getText());
+        cliente.setTelefono(tfTelefono.getText());
+        cliente.setEmail(tfEmail.getText());
+        cliente.setDireccion(tfDireccion.getText());
+        cliente.setCodigoPostal(tfCodigoPostal.getText());
+        cliente.setCiudad(tfCiudad.getText());
+        cliente.setStatus(true);
+        try{
+            resultado = ClienteDAO.registrarCliente(cliente);
+            if(resultado){
+                Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Éxito", "El usuario ha sido registrado correctamente.");
+            }
+        }catch(SQLException ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar la bd en el método registrarCliente", ex);
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en registrarCliente", ex);
             ex.printStackTrace();
         }
     }
+    
 }

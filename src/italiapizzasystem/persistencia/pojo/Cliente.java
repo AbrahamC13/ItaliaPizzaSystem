@@ -88,7 +88,7 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
