@@ -60,7 +60,24 @@ public class FXMLVerEmpleadosController implements Initializable {
 
     @FXML
     private void btnClicAgregarEmpleado(ActionEvent event) {
-        
+        try {
+            Stage escenarioBase = (Stage) tfNombre.getScene().getWindow();
+            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLAgregarEmpleado.fxml"));
+            Parent vista = cargador.load();
+            FXMLAgregarEmpleadoController controlador = cargador.getController();
+            Scene escenaEmpleado = new Scene(vista);
+            escenarioBase.setScene(escenaEmpleado);
+            escenarioBase.setTitle("Agregar Empleado");
+            escenarioBase.show();
+        } catch (IOException ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al agregar el empleado.", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLAgregarEmpleado", ex);
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en btnClicAgregarEmpleado", ex);
+            ex.printStackTrace();
+        }
     }
     
 }

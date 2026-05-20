@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLVerClientesController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLVerClientesController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="4.0" layoutY="4.0" prefHeight="394.0" prefWidth="594.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
@@ -19,7 +18,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#btnClicRegresar" text="Regresar" />
-                  <Region prefHeight="50.0" prefWidth="92.0" />
+                  <Region prefHeight="50.0" prefWidth="92.0" style="-fx-background-color: #FFFFFF;" />
                   <Label text="Gestión de clientes">
                      <font>
                         <Font name="System Bold" size="20.0" />
