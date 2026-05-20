@@ -12,11 +12,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.geometry.Insets;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 
 /**
  * FXML Controller class
@@ -66,6 +75,69 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnClicAdministracion(ActionEvent event) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Administración");
+        dialog.setHeaderText("Seleccione una opción");
+        dialog.setContentText("¿Qué desea gestionar?");
+
+        ButtonType empleadosBtn = new ButtonType("Empleados", ButtonBar.ButtonData.LEFT);
+        ButtonType clientesBtn = new ButtonType("Clientes", ButtonBar.ButtonData.LEFT);
+        ButtonType cancelarBtn = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        dialog.getDialogPane().getButtonTypes().addAll(empleadosBtn, clientesBtn, cancelarBtn);
+
+        dialog.getDialogPane().setPrefSize(400, 200);
+        // Procesamos la respuesta
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == empleadosBtn) {
+                abrirVistaEmpleados();
+            } else if (response == clientesBtn) {
+                abrirVistaClientes();
+            }
+            // Si es cancelar, no hace nada
+        });
+    }
+    
+    private void abrirVistaEmpleados(){
+        try {
+            Stage escenarioBase = (Stage) lbEmpleado.getScene().getWindow();
+            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLVerEmpleados.fxml"));
+            Parent vista = cargador.load();
+            FXMLVerEmpleadosController controlador = cargador.getController();
+            Scene escenaEmpleados = new Scene(vista);
+            escenarioBase.setScene(escenaEmpleados);
+            escenarioBase.setTitle("Empleados.");
+            escenarioBase.show();
+        } catch (IOException ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR,"Error", "No se pudo abrir la vista de empleados.");
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLVerEmpleados ", ex);
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR,"Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en abrirVistaEmpleados ", ex);
+            ex.printStackTrace();
+        }
+    }
+    
+    private void abrirVistaClientes(){
+        try {
+            Stage escenarioBase = (Stage) lbEmpleado.getScene().getWindow();
+            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLVerClientes.fxml"));
+            Parent vista = cargador.load();
+            FXMLVerClientesController controlador = cargador.getController();
+            Scene escenaClientes = new Scene(vista);
+            escenarioBase.setScene(escenaClientes);
+            escenarioBase.setTitle("Clientes.");
+            escenarioBase.show();
+        } catch (IOException ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR,"Error", "No se pudo abrir la vista de clientes.");
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLVerClientes ", ex);
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR,"Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en abrirVistaClientes ", ex);
+            ex.printStackTrace();
+        }
     }
 
     @FXML
