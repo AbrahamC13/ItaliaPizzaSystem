@@ -1,20 +1,24 @@
 
 package italiapizzasystem.controlador;
-import italiapizzasystem.persistencia.ConexionBD;
+import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.dao.ClienteDAO;
 import italiapizzasystem.persistencia.pojo.Cliente;
 import italiapizzasystem.utilidad.Utilidad;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -63,20 +67,34 @@ public class FXMLAgregarClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         Connection conexionBD = ConexionBD.abrirConexion();
-        if(conexionBD==null){
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Error", "Error al conectar a la BD");
-            
-        }
+        
     }    
 
     @FXML
     private void btnClicCancelar(ActionEvent event) {
+        try {
+            Stage escenarioBase = (Stage) tfNombre.getScene().getWindow();
+            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLVerClientes.fxml"));
+            Parent vista = cargador.load();
+            FXMLVerClientesController controlador = cargador.getController();
+            Scene escenaClientes = new Scene(vista);
+            escenarioBase.setScene(escenaClientes);
+            escenarioBase.setTitle("Ver clientes");
+            escenarioBase.show();
+        } catch (IOException ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al volver a la ventana anterior.", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLVerClientes", ex);
+            ex.printStackTrace();
+        }catch(Exception ex){
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en btnClicCancelar", ex);
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     private void btnClicGuardar(ActionEvent event) {
-        if(validarCamposVacios() && validarLongitudCampos() && validarFormatoCampos() && validarClienteExistente()){
+        if(validarCamposVacios() && validarLongitudCampos() && validarFormatoCampos() && !validarClienteExistente()){
             registrarCliente();
         }else{
             return;
@@ -112,7 +130,7 @@ public class FXMLAgregarClienteController implements Initializable {
         }
 
         String apellidoMaterno = tfApellidoMaterno.getText();
-        if (apellidoMaterno != null && !apellidoMaterno.isEmpty()) {
+        if (!apellidoMaterno.isEmpty()) {
             if (apellidoMaterno.length() > AMATERNO_MAX) {
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                     "El apellido materno debe tener máximo " + AMATERNO_MAX + " caracteres.");
@@ -261,6 +279,7 @@ public class FXMLAgregarClienteController implements Initializable {
             resultado = ClienteDAO.registrarCliente(cliente);
             if(resultado){
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Éxito", "El usuario ha sido registrado correctamente.");
+                limpiarCampos();
             }
         }catch(SQLException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());
@@ -273,4 +292,14 @@ public class FXMLAgregarClienteController implements Initializable {
         }
     }
     
+    private void limpiarCampos(){
+        tfNombre.clear();
+        tfApellidoPaterno.clear();
+        tfApellidoMaterno.clear();
+        tfTelefono.clear();
+        tfEmail.clear();
+        tfDireccion.clear();
+        tfCodigoPostal.clear();
+        tfCiudad.clear();
+    }
 }
