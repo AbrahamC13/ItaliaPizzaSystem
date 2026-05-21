@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLAgregarEmpleadoController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLAgregarEmpleadoController">
    <children>
       <VBox alignment="CENTER" layoutX="300.0" layoutY="83.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -66,7 +65,7 @@
                         <Label text="Teléfono:" />
                         <TextField fx:id="tfTelefono" prefHeight="31.0" prefWidth="147.0" promptText="Teléfono" />
                         <Label text="Rol:" />
-                        <TextField fx:id="tfRol" editable="false" prefHeight="31.0" prefWidth="101.0" promptText="Empleado" />
+                        <TextField fx:id="tfRol" editable="false" prefHeight="31.0" prefWidth="101.0" promptText="Empleado" text="Empleado" />
                      </children>
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="648.0" spacing="15.0">
