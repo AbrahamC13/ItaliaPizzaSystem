@@ -277,8 +277,8 @@ public class FXMLAgregarEmpleadoController implements Initializable {
      private void registrarEmpleado() {
         Empleado empleado = new Empleado();
         empleado.setNombre(tfNombre.getText().trim());
-        empleado.setaPaterno(tfApellidoPaterno.getText().trim());
-        empleado.setaMaterno(tfApellidoMaterno.getText().trim());
+        empleado.setAPaterno(tfApellidoPaterno.getText().trim());
+        empleado.setAMaterno(tfApellidoMaterno.getText().trim());
         empleado.setCiudad(tfCiudad.getText().trim());
         empleado.setCodigoPostal(tfCodigoPostal.getText().trim());
         empleado.setDireccion(tfDireccion.getText().trim());

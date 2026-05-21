@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLVerEmpleadosController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLVerEmpleadosController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="141.0" layoutY="37.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,16 +40,16 @@
             </HBox>
             <VBox prefHeight="265.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <TableView prefHeight="233.0" prefWidth="680.0">
+                  <TableView fx:id="tvEmpleados" prefHeight="233.0" prefWidth="680.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Nombre" />
-                      <TableColumn prefWidth="87.0" text="A. Paterno" />
-                        <TableColumn prefWidth="87.0" text="A, Materno" />
-                        <TableColumn prefWidth="70.0" text="Telefono" />
-                        <TableColumn prefWidth="92.0" text="Correo" />
-                        <TableColumn prefWidth="143.0" text="Direccion" />
-                        <TableColumn prefWidth="55.0" text="C. P." />
-                        <TableColumn prefWidth="70.0" text="Status" />
+                      <TableColumn fx:id="tcNombre" prefWidth="75.0" text="Nombre" />
+                      <TableColumn fx:id="tcPaterno" prefWidth="87.0" text="A. Paterno" />
+                        <TableColumn fx:id="tcMaterno" prefWidth="87.0" text="A, Materno" />
+                        <TableColumn fx:id="tcTelefono" prefWidth="70.0" text="Telefono" />
+                        <TableColumn fx:id="tcCorreo" prefWidth="92.0" text="Correo" />
+                        <TableColumn fx:id="tcDireccion" prefWidth="143.0" text="Direccion" />
+                        <TableColumn fx:id="tcCodigoPostal" prefWidth="55.0" text="C. P." />
+                        <TableColumn fx:id="tcStatus" prefWidth="70.0" text="Status" />
                     </columns>
                   </TableView>
                </children>

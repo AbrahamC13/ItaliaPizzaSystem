@@ -129,7 +129,7 @@ public class FXMLLoginController implements Initializable {
             Empleado empleadoAutenticado = EmpleadoDAO.validarCredenciales(username, password);
             if(empleadoAutenticado!= null){
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Credenciales correctas", "Bienvenido(a): "+
-                        empleadoAutenticado.getNombre()+" "+empleadoAutenticado.getaPaterno()+" "+empleadoAutenticado.getaMaterno());
+                        empleadoAutenticado.getNombre()+" "+empleadoAutenticado.getAPaterno()+" "+empleadoAutenticado.getAMaterno());
                 irPantallaPrincipal(empleadoAutenticado);
             }else{
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION,"Credenciales incorrectas", "Porfavor, verifique la información ingresada.");

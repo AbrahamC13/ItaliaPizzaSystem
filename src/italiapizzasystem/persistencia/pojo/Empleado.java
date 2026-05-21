@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package italiapizzasystem.persistencia.pojo;
 
 /**
@@ -39,19 +36,19 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public String getaPaterno() {
+    public String getAPaterno() {
         return aPaterno;
     }
 
-    public void setaPaterno(String aPaterno) {
+    public void setAPaterno(String aPaterno) {
         this.aPaterno = aPaterno;
     }
 
-    public String getaMaterno() {
+    public String getAMaterno() {
         return aMaterno;
     }
 
-    public void setaMaterno(String aMaterno) {
+    public void setAMaterno(String aMaterno) {
         this.aMaterno = aMaterno;
     }
 
