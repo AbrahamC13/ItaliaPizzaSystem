@@ -2,6 +2,7 @@ package italiapizzasystem.controlador;
 
 import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.pojo.Empleado;
+import italiapizzasystem.utilidad.Navegador;
 import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
 import java.net.URL;
@@ -187,24 +188,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnClicPedidos(ActionEvent event) {
-        try {
-            Stage escenarioBase = (Stage) lbEmpleado.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLPedidos.fxml"));
-            Parent vista = cargador.load();
-            FXMLPedidosController controlador = cargador.getController();
-            Scene escenaPedidos = new Scene(vista);
-            escenarioBase.setScene(escenaPedidos);
-            escenarioBase.setTitle("Pedidos.");
-            escenarioBase.show();
-        } catch (IOException ex) {
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al acceder a la página.", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error al cargar FXMLPedidos ", ex);
-            ex.printStackTrace();
-        }catch(Exception ex){
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error general capturado en la función btnClicPedidos ", ex);
-            ex.printStackTrace();
-        }
+        Navegador.cambiarVentana(lbEmpleado, "vista/FXMLPedidos.fxml", "Pedidos");
     }
     
 }
