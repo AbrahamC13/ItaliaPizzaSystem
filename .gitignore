@@ -13,3 +13,6 @@ nbproject/private/
 .DS_Store
 Thumbs.db
 *.log
+
+# Archivos de configuración
+config.properties
