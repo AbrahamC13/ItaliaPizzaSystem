@@ -14,5 +14,8 @@ nbproject/private/
 Thumbs.db
 *.log
 
+# Archivo generado por NetBeans, no debe subirse
+debug-another-platform.properties
+
 # Archivos de configuración
 **/config.properties
