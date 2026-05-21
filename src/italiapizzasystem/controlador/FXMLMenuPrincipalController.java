@@ -48,7 +48,7 @@ public class FXMLMenuPrincipalController implements Initializable {
     
     public void inicializarInformacion(Empleado empleado){
         this.empleado = empleado;
-        lbEmpleado.setText("Bienvenido(a) "+empleado.getNombre()+" "+empleado.getaPaterno()+" "+empleado.getaMaterno());
+        lbEmpleado.setText("Bienvenido(a) "+empleado.getNombre()+" "+empleado.getAPaterno()+" "+empleado.getAMaterno());
     }
 
     @FXML

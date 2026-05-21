@@ -14,7 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -24,9 +26,22 @@ import javafx.stage.Stage;
  */
 public class FXMLPedidosController implements Initializable {
 
-    @FXML
     private TextField tfNombreCliente;
     private static final Logger LOGGER = Logger.getLogger(FXMLPedidosController.class.getName());
+    @FXML
+    private TableColumn<?, ?> col_IdPedido;
+    @FXML
+    private TableColumn<?, ?> col_NombreCliente;
+    @FXML
+    private TableColumn<?, ?> col_Direccion;
+    @FXML
+    private TableColumn<?, ?> col_Fecha;
+    @FXML
+    private TableColumn<?, ?> col_Status;
+    @FXML
+    private TableColumn<?, ?> col_Editar;
+    @FXML
+    private TextField tf_NombreCliente;
     /**
      * Initializes the controller class.
      */
@@ -35,7 +50,6 @@ public class FXMLPedidosController implements Initializable {
         // TODO
     }    
 
-    @FXML
     private void btnClicRegresar(ActionEvent event) {
         try {
             Stage escenarioBase = (Stage) tfNombreCliente.getScene().getWindow();
@@ -58,17 +72,29 @@ public class FXMLPedidosController implements Initializable {
     }
 
     @FXML
-    private void btnClicNuevoPedido(ActionEvent event) {
+    private void click_BtnRegresar(MouseEvent event) {
         
     }
 
 
     @FXML
-    private void btnClicEditarPedido(ActionEvent event) {
+    private void btn_ClicRegresar(ActionEvent event) {
     }
 
     @FXML
-    private void btnClicExportarInformacionPedido(ActionEvent event) {
+    private void click_BtnNuevoPedido(MouseEvent event) {
+    }
+
+    @FXML
+    private void btn_ClicNuevoPedido(ActionEvent event) {
+    }
+
+    @FXML
+    private void click_BtnExportarInformacionPedido(MouseEvent event) {
+    }
+
+    @FXML
+    private void btn_ClicExportarInformacionPedido(ActionEvent event) {
     }
     
 }
