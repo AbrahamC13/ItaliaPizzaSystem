@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,12 +80,39 @@ public class FXMLVerEmpleadosController implements Initializable {
         listaEmpleados.clear(); 
 
         try {
-            // Llamamos directamente al método de tu DAO
             ArrayList<Empleado> empleadosBD = EmpleadoDAO.obtenerEmpleados();
-            // Pasamos los datos del ArrayList a la lista especial ObservableList de JavaFX
             listaEmpleados.addAll(empleadosBD);
-            // Asignamos la lista a la tabla
-            tvEmpleados.setItems(listaEmpleados);
+            // Al inicio, el predicado es 'p -> true' para que muestre todos los registros
+            FilteredList<Empleado> listaFiltrada = new FilteredList<>(listaEmpleados, p -> true);
+
+            // 3. Agregar un "Listener" al texto del TextField
+            // Esto se ejecutará automáticamente cada que el usuario escriba o borre una letra
+            tfNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+                listaFiltrada.setPredicate(empleado -> {
+                    // Si el buscador está vacío, muestra todos los empleados
+                    if (newValue == null || newValue.trim().isEmpty()) {
+                        return true;
+                    }
+                    // Convertimos el texto a minúsculas para que la búsqueda no sea estricta (case-insensitive)
+                    String textoBusqueda = newValue.toLowerCase().trim();
+                    // CONDICIONES DE BÚSQUEDA: Aquí defines por qué campos se puede buscar
+                    if (empleado.getNombre().toLowerCase().contains(textoBusqueda)) {
+                        return true; // Coincide con el nombre
+                    } else if (empleado.getAPaterno().toLowerCase().contains(textoBusqueda)) {
+                        return true; // Coincide con el apellido paterno
+                    } else if (empleado.getAMaterno() != null && empleado.getAMaterno().toLowerCase().contains(textoBusqueda)) {
+                        return true; // Coincide con el apellido materno (validando que no sea nulo)
+                    }
+                    return false; // No hubo coincidencia en ningún campo
+                });
+            });
+
+            // 4. Envolver el filtro en una SortedList para que el usuario pueda seguir ordenando las columnas dando clic en ellas
+            SortedList<Empleado> listaOrdenada = new SortedList<>(listaFiltrada);
+            listaOrdenada.comparatorProperty().bind(tvEmpleados.comparatorProperty());
+
+            // 5. IMPORTANTE: Ahora le pasamos la lista ordenada/filtrada a la tabla en lugar de la original
+            tvEmpleados.setItems(listaOrdenada);
             
         } catch (SQLException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectar a la bd.", ex.getMessage());
