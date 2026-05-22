@@ -5,16 +5,39 @@ package italiapizzasystem.persistencia.pojo;
  * @author Gerardo
  */
 public class Cliente {
-   private int idCliente;
-   private String nombre;
-   private String aPaterno;
-   private String aMaterno;
-   private String ciudad;
-   private String codigoPostal;
-   private String direccion;
-   private String email;
-   private String telefono;
-   private boolean status;
+
+    private int idCliente;
+    private String nombre;
+    private String aPaterno;
+    private String aMaterno;
+    private String ciudad;
+    private String codigoPostal;
+    private String direccion;
+    private String email;
+    private String telefono;
+    private boolean status;
+
+    public Cliente() {
+
+    }
+
+    public Cliente(int idCliente, String nombre,
+            String aPaterno, String aMaterno,
+            String ciudad, String codigoPostal,
+            String direccion, String email,
+            String telefono, boolean status) {
+
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.aPaterno = aPaterno;
+        this.aMaterno = aMaterno;
+        this.ciudad = ciudad;
+        this.codigoPostal = codigoPostal;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.status = status;
+    }
 
     public int getIdCliente() {
         return idCliente;
@@ -95,21 +118,4 @@ public class Cliente {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public Cliente() {
-    }
-
-    public Cliente(int idCliente, String nombre, String aPaterno, String aMaterno, String ciudad, String codigoPostal, String direccion, String email, String telefono, boolean status) {
-        this.idCliente = idCliente;
-        this.nombre = nombre;
-        this.aPaterno = aPaterno;
-        this.aMaterno = aMaterno;
-        this.ciudad = ciudad;
-        this.codigoPostal = codigoPostal;
-        this.direccion = direccion;
-        this.email = email;
-        this.telefono = telefono;
-        this.status = status;
-    }
-   
 }

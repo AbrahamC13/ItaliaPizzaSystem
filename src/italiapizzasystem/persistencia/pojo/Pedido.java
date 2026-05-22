@@ -5,11 +5,27 @@ package italiapizzasystem.persistencia.pojo;
  * @author Gerardo
  */
 public class Pedido {
+
     private int idPedido;
     private String fechaPedido;
     private String status;
     private int idCliente;
     private int idEmpleado;
+
+    public Pedido() {
+
+    }
+
+    public Pedido(int idPedido, String fechaPedido,
+            String status, int idCliente,
+            int idEmpleado) {
+
+        this.idPedido = idPedido;
+        this.fechaPedido = fechaPedido;
+        this.status = status;
+        this.idCliente = idCliente;
+        this.idEmpleado = idEmpleado;
+    }
 
     public int getIdPedido() {
         return idPedido;
@@ -50,16 +66,4 @@ public class Pedido {
     public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
-
-    public Pedido() {
-    }
-
-    public Pedido(int idPedido, String fechaPedido, String status, int idCliente, int idEmpleado) {
-        this.idPedido = idPedido;
-        this.fechaPedido = fechaPedido;
-        this.status = status;
-        this.idCliente = idCliente;
-        this.idEmpleado = idEmpleado;
-    }
-    
 }

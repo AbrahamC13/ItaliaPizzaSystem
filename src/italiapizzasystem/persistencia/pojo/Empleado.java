@@ -1,4 +1,3 @@
-
 package italiapizzasystem.persistencia.pojo;
 
 /**
@@ -6,6 +5,7 @@ package italiapizzasystem.persistencia.pojo;
  * @author Gerardo
  */
 public class Empleado {
+
     private int idEmpleado;
     private String nombre;
     private String aPaterno;
@@ -19,6 +19,33 @@ public class Empleado {
     private String contrasenia;
     private boolean status;
     private String rol;
+
+    public Empleado() {
+
+    }
+
+    public Empleado(int idEmpleado, String nombre,
+            String aPaterno, String aMaterno,
+            String ciudad, String codigoPostal,
+            String direccion, String email,
+            String telefono, String usuario,
+            String contrasenia, boolean status,
+            String rol) {
+
+        this.idEmpleado = idEmpleado;
+        this.nombre = nombre;
+        this.aPaterno = aPaterno;
+        this.aMaterno = aMaterno;
+        this.ciudad = ciudad;
+        this.codigoPostal = codigoPostal;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+        this.status = status;
+        this.rol = rol;
+    }
 
     public int getIdEmpleado() {
         return idEmpleado;
@@ -123,24 +150,4 @@ public class Empleado {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-    public Empleado() {
-    }
-
-    public Empleado(int idEmpleado, String nombre, String aPaterno, String aMaterno, String ciudad, String codigoPostal, String direccion, String email, String telefono, String usuario, String contrasenia, boolean status, String rol) {
-        this.idEmpleado = idEmpleado;
-        this.nombre = nombre;
-        this.aPaterno = aPaterno;
-        this.aMaterno = aMaterno;
-        this.ciudad = ciudad;
-        this.codigoPostal = codigoPostal;
-        this.direccion = direccion;
-        this.email = email;
-        this.telefono = telefono;
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
-        this.status = status;
-        this.rol = rol;
-    }
-    
 }

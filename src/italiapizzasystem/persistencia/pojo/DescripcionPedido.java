@@ -5,10 +5,25 @@ package italiapizzasystem.persistencia.pojo;
  * @author Gerardo
  */
 public class DescripcionPedido {
+
     private int idProducto;
     private int idPedido;
     private int cantidad;
     private double total;
+
+    public DescripcionPedido() {
+
+    }
+
+    public DescripcionPedido(int idProducto,
+            int idPedido, int cantidad,
+            double total) {
+
+        this.idProducto = idProducto;
+        this.idPedido = idPedido;
+        this.cantidad = cantidad;
+        this.total = total;
+    }
 
     public int getIdProducto() {
         return idProducto;
@@ -41,15 +56,4 @@ public class DescripcionPedido {
     public void setTotal(double total) {
         this.total = total;
     }
-
-    public DescripcionPedido() {
-    }
-
-    public DescripcionPedido(int idProducto, int idPedido, int cantidad, double total) {
-        this.idProducto = idProducto;
-        this.idPedido = idPedido;
-        this.cantidad = cantidad;
-        this.total = total;
-    }
-    
 }

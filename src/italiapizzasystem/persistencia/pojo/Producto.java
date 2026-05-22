@@ -5,12 +5,28 @@ package italiapizzasystem.persistencia.pojo;
  * @author Gerardo
  */
 public class Producto {
+
     private int idProducto;
     private String codigoProducto;
     private String descripcion;
     private String nombre;
     private double precio;
-    
+
+    public Producto() {
+
+    }
+
+    public Producto(int idProducto, String codigoProducto,
+            String descripcion, String nombre,
+            double precio) {
+
+        this.idProducto = idProducto;
+        this.codigoProducto = codigoProducto;
+        this.descripcion = descripcion;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
     public int getIdProducto() {
         return idProducto;
     }
@@ -50,17 +66,4 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
-    public Producto(){
-        
-    }
-
-    public Producto(int idProducto, String codigoProducto, String descripcion, String nombre, double precio) {
-        this.idProducto = idProducto;
-        this.codigoProducto = codigoProducto;
-        this.descripcion = descripcion;
-        this.nombre = nombre;
-        this.precio = precio;
-    }
-    
 }
