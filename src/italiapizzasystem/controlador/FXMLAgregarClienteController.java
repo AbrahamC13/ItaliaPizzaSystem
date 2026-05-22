@@ -267,8 +267,8 @@ public class FXMLAgregarClienteController implements Initializable {
         boolean resultado = false;
         Cliente cliente = new Cliente();
         cliente.setNombre(tfNombre.getText());
-        cliente.setaPaterno(tfApellidoPaterno.getText());
-        cliente.setaMaterno(tfApellidoMaterno.getText());
+        cliente.setAPaterno(tfApellidoPaterno.getText());
+        cliente.setAMaterno(tfApellidoMaterno.getText());
         cliente.setTelefono(tfTelefono.getText());
         cliente.setEmail(tfEmail.getText());
         cliente.setDireccion(tfDireccion.getText());

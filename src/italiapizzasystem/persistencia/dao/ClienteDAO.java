@@ -17,8 +17,8 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         Connection conexionBD = ConexionBD.abrirConexion();
         if(conexionBD!=null){
-            String consulta = "select idCliente, nombre, apaterno,amaterno, ciudad, codigopostal, "
-                    + "direccion,email,telefono,status from cliente ";
+            String consulta = "SELECT idCliente, nombre, aPaterno,aMaterno, ciudad, codigopostal, "
+                    + "direccion,email,telefono,status FROM cliente ";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
@@ -38,8 +38,10 @@ public class ClienteDAO {
         Cliente cliente = new Cliente();
         cliente.setIdCliente(resultado.getInt("idCliente"));
         cliente.setNombre(resultado.getString("nombre"));
-        cliente.setaPaterno(resultado.getString("apaterno"));
-        cliente.setaMaterno(resultado.getString("amaterno"));
+        cliente.setAPaterno(resultado.getString("aPaterno"));
+        String aMaterno = resultado.getString("aMaterno");
+        cliente.setAMaterno(resultado.wasNull() ? "" : aMaterno);
+        cliente.setAMaterno(resultado.getString("amaterno"));
         cliente.setTelefono(resultado.getString("telefono"));
         cliente.setStatus(resultado.getBoolean("status"));
         cliente.setCiudad(resultado.getString("ciudad"));
@@ -78,8 +80,8 @@ public class ClienteDAO {
             String consulta = "INSERT INTO cliente (nombre, aPaterno, aMaterno, ciudad, codigoPostal, direccion, email, telefono, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             sentencia.setString(1, cliente.getNombre());
-            sentencia.setString(2, cliente.getaPaterno());
-            sentencia.setString(3, cliente.getaMaterno()); // puede ser null
+            sentencia.setString(2, cliente.getAPaterno());
+            sentencia.setString(3, cliente.getAMaterno()); // puede ser null
             sentencia.setString(4, cliente.getCiudad());
             sentencia.setString(5, cliente.getCodigoPostal());
             sentencia.setString(6, cliente.getDireccion());
