@@ -18,46 +18,50 @@ import javafx.scene.control.TextField;
 public class FXMLRegistrarProductoController implements Initializable {
 
     @FXML
-    private TextField tfNombre;
+    private TextField tf_Nombre;
     @FXML
-    private TextArea taDescripcion;
+    private TextArea ta_Descripcion;
     @FXML
-    private TextArea taRestricciones;
+    private TextArea ta_Restricciones;
     @FXML
-    private TextField tfPrecio;
+    private TextField tf_Precio;
     @FXML
-    private TextField tfCantidad;
+    private TextField tf_Cantidad;
     @FXML
-    private Label lbCamposInvalidos;
+    private Label lb_Campos;
     @FXML
-    private Label lbNombreInvalido;
+    private Label lb_Nombre;
     @FXML
-    private Label lbDescripcionInvalido;
+    private Label lb_Descripcion;
     @FXML
-    private Label lbRestriccionInvalida;
+    private Label lb_Restriccion;
     @FXML
-    private Label lbPrecioInvalido;
+    private Label lb_Precio;
     @FXML
-    private Label lbCantidadInvalida;
+    private Label lb_Cantidad;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
 
     @FXML
-    private void btnClicCancelarRegistro(ActionEvent event) {
+    private void btn_CancelarRegistro(ActionEvent event) {
+        
     }
 
     @FXML
-    private void btnClicSubirArchivo(ActionEvent event) {
+    private void btn_SubirArchivo(ActionEvent event) {
+        
     }
 
     @FXML
-    private void btnClicRegistrarProducto(ActionEvent event) {
+    private void btn_RegistrarProducto(ActionEvent event) {
+        
     }
+    
     
 }
