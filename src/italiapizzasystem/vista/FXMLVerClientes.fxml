@@ -18,7 +18,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#btnClicRegresar" text="Regresar" />
-                  <Region prefHeight="50.0" prefWidth="92.0" style="-fx-background-color: #FFFFFF;" />
+                  <Region prefHeight="50.0" prefWidth="92.0" />
                   <Label text="Gestión de clientes">
                      <font>
                         <Font name="System Bold" size="20.0" />
