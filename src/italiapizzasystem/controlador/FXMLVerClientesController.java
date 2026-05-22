@@ -2,12 +2,15 @@
 package italiapizzasystem.controlador;
 
 import italiapizzasystem.ItaliaPizzaSystem;
+import italiapizzasystem.persistencia.pojo.Cliente;
 import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,8 +33,23 @@ public class FXMLVerClientesController implements Initializable {
     @FXML
     private TextField tfNombre;
     @FXML
-    private TableView<?> tvClientes;
+    private TableView<Cliente> tvClientes;
     private static final Logger LOGGER = Logger.getLogger(FXMLVerClientesController.class.getName());
+    @FXML
+    private TableColumn<Cliente, String> tcNombre;
+    @FXML
+    private TableColumn<Cliente, String> tcPaterno;
+    @FXML
+    private TableColumn<Cliente, String> tcMaterno;
+    @FXML
+    private TableColumn<Cliente, String> tcTelefono;
+    @FXML
+    private TableColumn<Cliente, String> tcCorreo;
+    @FXML
+    private TableColumn<Cliente, String> tcCodigoPostal;
+    @FXML
+    private TableColumn<Cliente, String> tcDireccion;
+    private ObservableList<Cliente> listaEmpleados = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
      */
