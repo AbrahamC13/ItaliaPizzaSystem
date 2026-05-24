@@ -4,6 +4,7 @@ import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.dao.PedidoDAO;
 import italiapizzasystem.persistencia.pojo.PedidoCliente;
 import italiapizzasystem.utilidad.EfectoBotones;
+import italiapizzasystem.utilidad.Navegador;
 import italiapizzasystem.utilidad.PedidoFila;
 import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
@@ -107,31 +108,14 @@ public class FXMLPedidosController implements Initializable {
     
     @FXML
     public void btn_ClicRegresar(ActionEvent event) {
-        try {
-            Stage escenarioBase = (Stage) tf_NombreCliente.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLMenuPrincipal.fxml"));
-            Parent vista = cargador.load();
-            FXMLMenuPrincipalController controlador = cargador.getController();
-            Scene escenaMenu = new Scene(vista);
-            escenarioBase.setScene(escenaMenu);
-            escenarioBase.setTitle("Menu Principal");
-            escenarioBase.show();
-        } catch (IOException ex) {
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al volver al menú principal.", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error al cargar FXMLMenuPrincipal", ex);
-            ex.printStackTrace();
-        }catch(Exception ex){
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error general capturado en btnClicRegresar", ex);
-            ex.printStackTrace();
-        }
+        Navegador.cambiarVentana(tbl_Pedidos, "vista/FXMLMenuPrincipal.fxml", "Menu principal");
     }
 
 
 
     @FXML
     private void btn_ClicNuevoPedido(ActionEvent event) {
-        
+        Navegador.cambiarVentana(tbl_Pedidos, "vista/FXMLPedidosBuscarCliente.fxml", "Nuevo pedido");
     }
 
 

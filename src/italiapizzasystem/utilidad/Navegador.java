@@ -31,6 +31,7 @@ public class Navegador {
             Scene escena = new Scene(vista);
             escenarioBase.setScene(escena);
             escenarioBase.setTitle(titulo);
+            escenarioBase.centerOnScreen();
             escenarioBase.show();
         } catch (IOException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error de navegación", "No se pudo cargar la vista: " + titulo);
@@ -47,6 +48,7 @@ public class Navegador {
             Scene escena = new Scene(vista);
             escenarioBase.setScene(escena);
             escenarioBase.setTitle(titulo);
+            escenarioBase.centerOnScreen();
             escenarioBase.show();
             
             return cargador;

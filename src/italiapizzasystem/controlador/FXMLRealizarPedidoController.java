@@ -1,5 +1,6 @@
 package italiapizzasystem.controlador;
 
+import italiapizzasystem.persistencia.pojo.Cliente;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,6 +15,8 @@ import javafx.scene.control.TextField;
  */
 public class FXMLRealizarPedidoController implements Initializable {
 
+    private Cliente clienteElegido;
+    
     @FXML
     private TextField tfNombreCliente;
 
