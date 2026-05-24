@@ -36,8 +36,8 @@ public class DescripcionPedidoDAO {
     private static DescripcionPedido serializarDescripcionPedido(ResultSet resultado) throws SQLException{
         DescripcionPedido descripcionPedido = new DescripcionPedido();
         descripcionPedido.setCantidad(resultado.getInt("cantidad"));
-        descripcionPedido.setIdPedido(resultado.getInt("idPedido"));
-        descripcionPedido.setIdProducto(resultado.getInt("idProducto"));
+        descripcionPedido.setIdPedido(resultado.getInt("Pedido_idPedido"));
+        descripcionPedido.setIdProducto(resultado.getInt("Producto_idProducto"));
         descripcionPedido.setTotal(resultado.getDouble("total"));
         return descripcionPedido;
     }

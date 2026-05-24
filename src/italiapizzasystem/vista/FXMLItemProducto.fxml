@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLItemProductoController">
+   <children>
+      <AnchorPane layoutY="-4.0" prefHeight="154.0" prefWidth="430.0" style="-fx-background-color: #730800;">
+         <children>
+            <ImageView fx:id="img_ImagenProducto" fitHeight="129.0" fitWidth="286.0" layoutX="74.0" layoutY="11.0" pickOnBounds="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ap_DescripcionCompletaProducto" layoutX="2.0" layoutY="152.0" prefHeight="187.0" prefWidth="416.0">
+         <children>
+            <ScrollPane layoutX="1.0" layoutY="-2.0" prefHeight="187.0" prefWidth="429.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="179.0" prefWidth="423.0" style="-fx-background-color: FFFFFF;">
+                     <children>
+                        <Label fx:id="lb_NombreProducto" alignment="CENTER" layoutX="16.0" layoutY="5.0" prefHeight="22.0" prefWidth="393.0" text="Pizza hawaiana" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lb_CodigoProducto" alignment="CENTER" layoutX="25.0" layoutY="27.0" prefHeight="17.0" prefWidth="393.0" text="#001" textAlignment="CENTER">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="8.0" layoutY="45.0" prefHeight="17.0" prefWidth="78.0" text="Descripción:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="5.0" layoutY="97.0" prefHeight="17.0" prefWidth="85.0" text="Restricciones:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="9.0" layoutY="126.0" text="Precio:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lb_DescripcionProducto" layoutX="82.0" layoutY="46.0" prefWidth="323.0" text="Breve descripción del producto" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lb_RestriccionesProducto" layoutX="87.0" layoutY="99.0" prefWidth="323.0" text="Restricciones" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lb_PrecioProducto" layoutX="57.0" layoutY="128.0" prefHeight="14.0" prefWidth="78.0" text="\$200" textFill="#358a00">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btn_Agregar" layoutX="334.0" layoutY="134.0" mnemonicParsing="false" onAction="#btn_clicAgregar" prefHeight="35.0" prefWidth="54.0" style="-fx-background-color: #36E800; -fx-background-radius: 15;" text="+">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

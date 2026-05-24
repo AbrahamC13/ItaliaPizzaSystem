@@ -7,33 +7,99 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLRealizarPedidoController">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLRealizarPedidoController">
    <children>
-      <AnchorPane layoutY="-1.0" prefHeight="178.0" prefWidth="600.0">
+      <AnchorPane layoutY="-1.0" prefHeight="93.0" prefWidth="935.0" style="-fx-background-color: #004D57;">
          <children>
-            <Label layoutX="198.0" layoutY="32.0" text="Realización de pedido">
+            <Label layoutX="313.0" layoutY="25.0" text="Lista de productos" textFill="WHITE">
                <font>
-                  <Font size="21.0" />
+                  <Font name="Arial Black" size="30.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnClicRegresar" text="Regresar" />
-            <Label layoutX="129.0" layoutY="79.0" text="Seleccione el cliente al que desee realizar el pedido." />
-            <Label layoutX="53.0" layoutY="123.0" text="Buscar por nombre:" />
-            <TextField fx:id="tfNombreCliente" layoutX="198.0" layoutY="118.0" prefHeight="31.0" prefWidth="252.0" promptText="Nombre cliente" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="177.0" prefHeight="224.0" prefWidth="600.0">
+      <AnchorPane fx:id="ap_ContenedorProductos" layoutY="90.0" prefHeight="909.0" prefWidth="937.0">
          <children>
-            <TableView layoutX="48.0" prefHeight="156.0" prefWidth="504.0">
-              <columns>
-                <TableColumn prefWidth="119.0" text="Nombre cliente" />
-                <TableColumn prefWidth="93.0" text="Teléfono" />
-                  <TableColumn prefWidth="123.0" text="Correo" />
-                  <TableColumn prefWidth="168.0" text="Dirección" />
-              </columns>
-            </TableView>
-            <Button layoutX="487.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnClicAceptar" text="Aceptar" />
+            <ScrollPane prefHeight="908.0" prefWidth="937.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="899.0" prefWidth="921.0">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutY="8.0" prefViewportHeight="884.0" prefViewportWidth="901.0">
+                           <content>
+                              <FlowPane fx:id="fp_productos" layoutY="8.0" prefHeight="884.0" prefWidth="901.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children></AnchorPane>
+      <AnchorPane layoutX="933.0" layoutY="-5.0" prefHeight="930.0" prefWidth="647.0" style="-fx-background-color: #FAF8F1;">
+         <children>
+            <AnchorPane layoutX="-3.0" prefHeight="93.0" prefWidth="647.0">
+               <children>
+                  <Label layoutX="363.0" layoutY="35.0" prefHeight="23.0" prefWidth="137.0" text="Fecha pedido:">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lb_Fecha" layoutX="511.0" layoutY="33.0" text="00/00/0000">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="23.0" layoutY="149.0" text="Cliente:">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="-8.0" layoutY="218.0" prefHeight="573.0" prefWidth="652.0">
+               <children>
+                  <TableView fx:id="tbl_Orden" layoutX="22.0" layoutY="8.0" prefHeight="527.0" prefWidth="612.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                    <columns>
+                      <TableColumn fx:id="col_Producto" prefWidth="234.3333740234375" text="Producto" />
+                      <TableColumn fx:id="col_Cantidad" prefWidth="124.0" text="Cantidad" />
+                        <TableColumn fx:id="col_Subtotal" prefWidth="143.0" text="Subtotal" />
+                        <TableColumn fx:id="col_Quitar" prefWidth="109.0" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+            <AnchorPane layoutX="-3.0" layoutY="792.0" prefHeight="199.0" prefWidth="649.0">
+               <children>
+                  <Label layoutX="309.0" layoutY="42.0" text="Total a pagar:">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btn_Cancelar" layoutX="50.0" layoutY="122.0" mnemonicParsing="false" onAction="#btn_clicCancelar" prefHeight="51.0" prefWidth="182.0" style="-fx-background-radius: 50; -fx-background-color: #FF5826;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_RealizarPedido" layoutX="395.0" layoutY="119.0" mnemonicParsing="false" onAction="#btn_clicRealizarPedido" prefHeight="51.0" prefWidth="211.0" style="-fx-background-radius: 50; -fx-background-color: #72FF47;" text="Realizar pedido">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="lb_Total" layoutX="470.0" layoutY="26.0" text="\$500" textFill="#0a8f00">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="512.0" layoutY="186.0" text="Orden" textFill="#004d57">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_NombreCliente" layoutX="131.0" layoutY="148.0" prefHeight="27.0" prefWidth="414.0" text="Abraham Cano Ramírez">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

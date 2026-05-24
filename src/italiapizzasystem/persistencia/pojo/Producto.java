@@ -10,20 +10,23 @@ public class Producto {
     private String codigoProducto;
     private String descripcion;
     private String nombre;
+    private String restricciones;
     private double precio;
+    private byte[] foto;
 
     public Producto() {
 
     }
 
     public Producto(int idProducto, String codigoProducto,
-            String descripcion, String nombre,
+            String descripcion, String nombre, String restricciones,
             double precio) {
 
         this.idProducto = idProducto;
         this.codigoProducto = codigoProducto;
         this.descripcion = descripcion;
         this.nombre = nombre;
+        this.restricciones = restricciones;
         this.precio = precio;
     }
 
@@ -58,6 +61,14 @@ public class Producto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public String getRestricciones() {
+        return restricciones;
+    }
+
+    public void setRestricciones(String restricciones) {
+        this.restricciones= restricciones;
+    }
 
     public double getPrecio() {
         return precio;
@@ -65,5 +76,13 @@ public class Producto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+    
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }
