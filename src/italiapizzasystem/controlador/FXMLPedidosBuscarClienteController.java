@@ -133,22 +133,27 @@ public class FXMLPedidosBuscarClienteController implements Initializable {
     }
 
     @FXML
-    private void btn_ClicAceptar(ActionEvent event) {
+    private void btn_ClicAceptar(ActionEvent event){
         Cliente seleccion = tbl_Clientes.getSelectionModel().getSelectedItem();
-    
-        if (seleccion != null) {
-            FXMLLoader cargador = Navegador.cambiarVentanaConControlador(
-                tbl_Clientes, 
-                "vista/FXMLRealizarPedido.fxml", 
-                "Realizar Pedido"
-            );
 
-            if (cargador != null) {
-                FXMLRealizarPedidoController destino = cargador.getController();
-            }
-        } else {
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.WARNING, "Selección requerida", 
-                    "Debe seleccionar un cliente de la lista para continuar.");
+        if (seleccion == null){
+            Utilidad.mostrarAlertaSimple(
+                Alert.AlertType.WARNING, 
+                "Selección requerida", 
+                "Debe seleccionar un cliente de la lista para continuar."
+            );
+            return; 
+        }
+
+        FXMLLoader cargador = Navegador.cambiarVentanaConControlador(
+            tbl_Clientes, 
+            "vista/FXMLRealizarPedido.fxml", 
+            "Realizar Pedido"
+        );
+
+        if (cargador != null){
+            FXMLRealizarPedidoController destino = cargador.getController();
+            destino.inicializarCliente(seleccion); 
         }
     }
     

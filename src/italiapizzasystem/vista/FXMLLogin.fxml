@@ -42,7 +42,7 @@
                </font>
             </Hyperlink>
             <AnchorPane layoutX="5.0" layoutY="1.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #008C45;" />
-            <AnchorPane layoutX="30.0" layoutY="14.0" prefHeight="602.0" prefWidth="25.0" style="-fx-background-color: #F4F5F0);" />
+            <AnchorPane layoutX="30.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #F4F5F0;" />
             <AnchorPane layoutX="55.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #CE2B37;" />
          </children>
       </AnchorPane>

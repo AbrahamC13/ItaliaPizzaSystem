@@ -1,9 +1,13 @@
 package italiapizzasystem.controlador;
 
+import italiapizzasystem.excepciones.RegistrarPedidoException;
+import italiapizzasystem.persistencia.dao.PedidoDAO;
 import italiapizzasystem.persistencia.dao.ProductoDAO;
 import italiapizzasystem.persistencia.pojo.Cliente;
 import italiapizzasystem.persistencia.pojo.OrdenFila;
+import italiapizzasystem.persistencia.pojo.Pedido;
 import italiapizzasystem.persistencia.pojo.Producto;
+import italiapizzasystem.persistencia.pojo.UserSession;
 import italiapizzasystem.utilidad.EfectoBotones;
 import italiapizzasystem.utilidad.Navegador;
 import italiapizzasystem.utilidad.Utilidad;
@@ -14,6 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,6 +43,8 @@ import javafx.scene.layout.FlowPane;
  */
 public class FXMLRealizarPedidoController implements Initializable {
 
+    private static final Logger LOGGER = Logger.getLogger(FXMLRealizarPedidoController.class.getName());
+    
     private Cliente clienteElegido;
     @FXML
     private Label lb_Fecha;
@@ -144,8 +151,7 @@ public class FXMLRealizarPedidoController implements Initializable {
             inyectarProductosEnFlowPane(productos);
             
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLRealizarPedidoController.class.getName())
-                .log(java.util.logging.Level.SEVERE, "Fallo al consultar productos", ex);
+            LOGGER.log(Level.SEVERE, "Fallo al consultar productos", ex);
             Utilidad.mostrarAlertaSimple(javafx.scene.control.Alert.AlertType.ERROR, "Error BD", "No se pudo cargar el catálogo.");
         }
     }
@@ -170,8 +176,7 @@ public class FXMLRealizarPedidoController implements Initializable {
             
             return nodoVisual;
         } catch (IOException ex) {
-            Logger.getLogger(FXMLRealizarPedidoController.class.getName())
-                .log(java.util.logging.Level.SEVERE, "Error al llenar FXML del producto", ex);
+            LOGGER.log(Level.SEVERE, "Error al llenar FXML del producto", ex);
             return null; 
         }
     }
@@ -181,7 +186,85 @@ public class FXMLRealizarPedidoController implements Initializable {
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         lb_Fecha.setText(fechaHoy.format(formateador));
     }
-    
+
+    @FXML
+    private void btn_clicRealizarPedido(ActionEvent event) {
+        if (!validarFormulario()) {
+            return;
+        }
+
+        try {
+            Pedido pedidoNuevo = construirPedido();
+            ArrayList<OrdenFila> productosOrden = new ArrayList<>(listaOrden);
+
+            boolean resultadoExitoso = PedidoDAO.registrarPedido(pedidoNuevo, productosOrden);
+
+            if (!resultadoExitoso) {
+                Utilidad.mostrarAlertaSimple(
+                    javafx.scene.control.Alert.AlertType.ERROR, 
+                    "Error de guardado", 
+                    "No se pudo registrar el pedido. Intente más tarde."
+                );
+                return;
+            }
+
+            Utilidad.mostrarAlertaSimple(
+                javafx.scene.control.Alert.AlertType.INFORMATION, 
+                "Pedido registrado", 
+                "El pedido se ha guardado exitosamente en el sistema."
+            );
+
+            listaOrden.clear();
+            Navegador.cambiarVentana(btn_RealizarPedido, "vista/FXMLPedidos.fxml", "Pedidos");
+
+        } catch (RegistrarPedidoException ex) {
+            LOGGER.log(Level.SEVERE, "Error al procesar el registro de pedido en el controlador", ex);
+
+            Utilidad.mostrarAlertaSimple(
+                javafx.scene.control.Alert.AlertType.ERROR, 
+                "Error de registro", 
+                "Hubo un error al guarda el pedido en la BD"
+            );
+        }
+    }
+
+    private boolean validarFormulario() {
+        if (listaOrden == null || listaOrden.isEmpty()) {
+            Utilidad.mostrarAlertaSimple(
+                javafx.scene.control.Alert.AlertType.WARNING, 
+                "Campos vacíos", 
+                "No se puede realizar un pedido si no se han agregado productos a la orden."
+            );
+            return false;
+        }
+
+        if (clienteElegido == null) {
+            Utilidad.mostrarAlertaSimple(
+                javafx.scene.control.Alert.AlertType.WARNING, 
+                "Falta Cliente", 
+                "Es necesario tener un cliente asignado para registrar el pedido."
+            );
+            return false;
+        }
+
+        return true;
+    }
+
+    private Pedido construirPedido() {
+        Pedido pedido = new Pedido();
+
+        LocalDate fechaHoy = LocalDate.now();
+        DateTimeFormatter formateadorBD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        int idEmpleadoSesion = UserSession.getInstancia().getEmpleadoConectado().getIdEmpleado();
+        
+        pedido.setFechaPedido(fechaHoy.format(formateadorBD));
+        pedido.setStatus("Registrado");
+        pedido.setIdCliente(clienteElegido.getIdCliente());
+        pedido.setIdEmpleado(idEmpleadoSesion); 
+
+        return pedido;
+    }
+
     @FXML
     private void btn_clicCancelar(ActionEvent event){
         if (listaOrden != null){
@@ -191,10 +274,4 @@ public class FXMLRealizarPedidoController implements Initializable {
         Navegador.cambiarVentana(btn_Cancelar, "vista/FXMLPedidos.fxml", "Pedidos"
         );
     }
-
-    @FXML
-    private void btn_clicRealizarPedido(ActionEvent event) {
-    }
-
-    
 }

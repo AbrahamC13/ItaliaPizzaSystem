@@ -8,23 +8,23 @@ import italiapizzasystem.excepciones.PedidoEstadoInvalidoException;
 import italiapizzasystem.persistencia.dao.PedidoDAO;
 import italiapizzasystem.persistencia.pojo.PedidoCliente;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
  * @author acrca
  */
 public class PedidoFila {
-private int idPedido;
+    
+    private static final Logger LOGGER = Logger.getLogger(PedidoFila.class.getName());
+    
+    private int idPedido;
     private String nombreCliente;
     private String direccion;
     private String fechaPedido;
@@ -40,13 +40,50 @@ private int idPedido;
         this.comboEstado = new ComboBox<>(FXCollections.observableArrayList("En Proceso", "Entregado", "Cancelado"));
         this.comboEstado.setValue(pedidoBase.getStatus());
         
-        // Se debe deshabilitar el cambio de estado si ya se encuentra cancelado o entregado
-        if ("Entregado".equalsIgnoreCase(pedidoBase.getStatus()) || "Cancelado".equalsIgnoreCase(pedidoBase.getStatus())) {
-            this.comboEstado.setDisable(true);
-        }
-        
         this.botonEditar = new Button("Editar");
         this.botonEditar.setOnAction(event -> accionEditar(pedidoBase.getStatus()));
+        
+        verificarEstadoPedido(pedidoBase.getStatus());
+        configurarEventosComboBox();
+        estilizarComboBox();
+        estilizarBotonEditar();
+    }
+    
+    private void configurarEventosComboBox() {
+        this.comboEstado.valueProperty().addListener((observable, valorAnterior, valorNuevo) -> {
+            if (valorNuevo == null || valorNuevo.equals(valorAnterior)) {
+                return;
+            }
+
+            try {
+                boolean actualizacionExitosa = PedidoDAO.actualizarEstatusPedido(this.idPedido, valorNuevo);
+
+                if (actualizacionExitosa) {
+                    Utilidad.mostrarAlertaSimple(
+                        Alert.AlertType.INFORMATION, 
+                        "Estatus actualizado", 
+                        "El estado del pedido #" + this.idPedido + " se actualizó a: " + valorNuevo
+                    );
+                    verificarEstadoPedido(valorNuevo);
+                }
+
+            } catch (SQLException ex) {
+                this.comboEstado.setValue(valorAnterior);
+                
+                LOGGER.log(Level.SEVERE, "Error al actualizar el estatus del pedido #" + this.idPedido, ex);
+                Utilidad.mostrarAlertaSimple(
+                    Alert.AlertType.ERROR, 
+                    "Error de Conexión", 
+                    "No se pudo guardar el cambio de estado en la base de datos."
+                );
+            }
+        });
+    }
+    
+    private void verificarEstadoPedido(String estado) {
+        if ("Entregado".equalsIgnoreCase(estado) || "Cancelado".equalsIgnoreCase(estado)) {
+            this.comboEstado.setDisable(true);
+        }
     }
 
     private void accionEditar(String estado) {
@@ -65,4 +102,47 @@ private int idPedido;
     public String getFechaPedido() { return fechaPedido; }
     public ComboBox<String> getComboEstado() { return comboEstado; }
     public Button getBotonEditar() { return botonEditar; }
+    
+    private void estilizarComboBox() {
+        this.comboEstado.setPrefWidth(150.0);
+        this.comboEstado.setCursor(Cursor.HAND);
+        this.comboEstado.setStyle(
+            "-fx-background-color: #FFFFFF; " +
+            "-fx-border-color: #CCCCCC; " +
+            "-fx-border-radius: 5; " +
+            "-fx-background-radius: 5; " +
+            "-fx-font-size: 13px;"
+        );
+    }
+
+    private void estilizarBotonEditar() {
+        this.botonEditar.setPrefWidth(90.0);
+        configurarEfectoHoverBoton();
+    }
+
+    private void configurarEfectoHoverBoton() {
+        String estiloBase = 
+            "-fx-background-color: #007BFF; " + 
+            "-fx-text-fill: white; " +
+            "-fx-font-weight: bold; " +
+            "-fx-border-radius: 5; " +
+            "-fx-background-radius: 5; " +
+            "-fx-padding: 5 15 5 15; " +
+            "-fx-font-size: 12px;";
+            
+        String estiloHover = 
+            "-fx-background-color: #0056b3; " + 
+            "-fx-text-fill: white; " +
+            "-fx-font-weight: bold; " +
+            "-fx-border-radius: 5; " +
+            "-fx-background-radius: 5; " +
+            "-fx-padding: 5 15 5 15; " +
+            "-fx-font-size: 12px;";
+
+        this.botonEditar.setStyle(estiloBase);
+        this.botonEditar.setCursor(Cursor.HAND);
+
+        this.botonEditar.setOnMouseEntered(e -> this.botonEditar.setStyle(estiloHover));
+        this.botonEditar.setOnMouseExited(e -> this.botonEditar.setStyle(estiloBase));
+    }
 }

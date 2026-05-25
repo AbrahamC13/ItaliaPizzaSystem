@@ -82,6 +82,14 @@ public class FXMLPedidosController implements Initializable {
         col_Fecha.setCellValueFactory(new PropertyValueFactory<>("fechaPedido"));
         col_Status.setCellValueFactory(new PropertyValueFactory<>("comboEstado"));
         col_Editar.setCellValueFactory(new PropertyValueFactory<>("botonEditar"));
+        alinearColumnasTabla();
+    }
+    
+    private void alinearColumnasTabla() {
+        col_Status.setStyle("-fx-alignment: CENTER;");
+        col_Editar.setStyle("-fx-alignment: CENTER;");
+        col_IdPedido.setStyle("-fx-alignment: CENTER;");
+        col_Fecha.setStyle("-fx-alignment: CENTER;");
     }
     
     private void cargarDatosTabla() {

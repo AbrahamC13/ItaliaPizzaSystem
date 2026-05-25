@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,40 +9,60 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLMenuPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLMenuPrincipalController">
    <children>
-      <AnchorPane prefHeight="77.0" prefWidth="600.0">
+      <ImageView fitHeight="306.0" fitWidth="331.0" layoutX="33.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../italiapizzasystemRecursos/imagenes/logoConFondo.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="142.0" prefWidth="1280.0" style="-fx-background-color: #008C45;">
          <children>
-            <Label layoutX="420.0" layoutY="25.0" text="Italian Pizza">
+            <Label layoutX="392.0" layoutY="30.0" text="Italia Pizza" textFill="WHITE">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial Black" size="55.0" />
                </font>
             </Label>
-            <Button layoutX="30.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnClicCerrarSesion" text="Cerrar sesión" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="-1.0" layoutY="77.0" prefHeight="126.0" prefWidth="600.0">
-         <children>
-            <Label fx:id="lbEmpleado" layoutX="261.0" layoutY="26.0" prefHeight="21.0" prefWidth="323.0">
+            <Button fx:id="btn_CerrarSesion" layoutX="1075.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnClicCerrarSesion" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 20; -fx-background-color: #CE2B37;" text="Cerrar sesión" textFill="WHITE">
                <font>
                   <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="45.0" layoutY="90.0" text="Selecciona la operación que quieras realizar:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
+               </font></Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-1.0" layoutY="203.0" prefHeight="200.0" prefWidth="600.0">
+      <AnchorPane layoutX="458.0" layoutY="142.0" prefHeight="126.0" prefWidth="821.0">
          <children>
-            <Button layoutX="118.0" layoutY="58.0" mnemonicParsing="false" onAction="#btnClicAdministracion" text="Administración" />
-            <Button layoutX="366.0" layoutY="58.0" mnemonicParsing="false" onAction="#btnClicAyuda" text="Ayuda" />
-            <Button layoutX="132.0" layoutY="129.0" mnemonicParsing="false" onAction="#btnClicInventarios" text="Inventarios" />
-            <Button layoutX="361.0" layoutY="129.0" mnemonicParsing="false" onAction="#btnClicPedidos" text="Pedidos" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="77.0" prefHeight="35.0" prefWidth="750.0" text="Selecciona la operación que quieras realizar:" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbEmpleado" alignment="CENTER_RIGHT" layoutX="326.0" layoutY="23.0" prefHeight="32.0" prefWidth="462.0" text="Abraham Cano" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="459.0" layoutY="276.0" prefHeight="442.0" prefWidth="821.0">
+         <children>
+            <Button fx:id="btn_Administracion" layoutX="271.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnClicAdministracion" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55;" text="Administración">
+               <font>
+                  <Font size="22.0" />
+               </font></Button>
+            <Button fx:id="btn_Ayuda" layoutX="693.0" layoutY="334.0" mnemonicParsing="false" onAction="#btnClicAyuda" prefHeight="82.0" prefWidth="84.0" style="-fx-background-radius: 150; -fx-background-color: #0092C2;" text="Ayuda" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="btn_Inventarios" layoutX="271.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnClicInventarios" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55;" text="Inventarios">
+               <font>
+                  <Font size="22.0" />
+               </font></Button>
+            <Button fx:id="btn_Pedidos" layoutX="271.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnClicPedidos" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55;" text="Pedidos">
+               <font>
+                  <Font size="22.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="142.0" prefHeight="580.0" prefWidth="462.0" style="-fx-background-color: #004D57;" />
    </children>
 </AnchorPane>

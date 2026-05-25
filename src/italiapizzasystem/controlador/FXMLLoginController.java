@@ -130,6 +130,7 @@ public class FXMLLoginController implements Initializable {
             if(empleadoAutenticado!= null){
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Credenciales correctas", "Bienvenido(a): "+
                         empleadoAutenticado.getNombre()+" "+empleadoAutenticado.getAPaterno()+" "+empleadoAutenticado.getAMaterno());
+                italiapizzasystem.persistencia.pojo.UserSession.getInstancia().setEmpleadoConectado(empleadoAutenticado);
                 irPantallaPrincipal(empleadoAutenticado);
             }else{
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION,"Credenciales incorrectas", "Porfavor, verifique la información ingresada.");
