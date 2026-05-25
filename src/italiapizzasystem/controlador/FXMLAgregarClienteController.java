@@ -96,37 +96,35 @@ public class FXMLAgregarClienteController implements Initializable {
     private void btnClicGuardar(ActionEvent event) {
         if(validarCamposVacios() && validarLongitudCampos() && validarFormatoCampos() && !validarClienteExistente()){
             registrarCliente();
-        }else{
-            return;
         }
     }
     
     private boolean validarCamposVacios(){
-        boolean resultado = true;
         if(tfNombre.getText().isEmpty() || tfApellidoPaterno.getText().isEmpty()  || 
                 tfTelefono.getText().isEmpty() || tfEmail.getText().isEmpty() || tfDireccion.getText().isEmpty() || 
                 tfCodigoPostal.getText().isEmpty() || tfCiudad.getText().isEmpty()  ){
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Datos incompletos", "Porfavor, asegúrate de que todos los campos están llenos");
-            resultado = false;
+            
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Datos incompletos",
+                    "Por favor, asegúrate de que todos los campos están llenos");
+            return false;
         }
-        return resultado;
+        return true;
     }
     
     private boolean validarLongitudCampos() {
-        boolean resultado = true;
-
+       
         int longitudNombre = tfNombre.getText().length();
         if (longitudNombre > NOMBRE_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El nombre debe tener máximo " + NOMBRE_MAX + " caracteres.");
-            resultado = false;
+            return false;
         }
 
         int longitudApellidoPaterno = tfApellidoPaterno.getText().length();
         if (longitudApellidoPaterno > APATERNO_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El apellido paterno debe tener máximo " + APATERNO_MAX + " caracteres.");
-            resultado = false;
+            return false;
         }
 
         String apellidoMaterno = tfApellidoMaterno.getText();
@@ -134,7 +132,7 @@ public class FXMLAgregarClienteController implements Initializable {
             if (apellidoMaterno.length() > AMATERNO_MAX) {
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                     "El apellido materno debe tener máximo " + AMATERNO_MAX + " caracteres.");
-                resultado = false;
+                return false;
             }
         }
 
@@ -142,129 +140,128 @@ public class FXMLAgregarClienteController implements Initializable {
         if (telefono.length() != TELEFONO_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El teléfono debe tener exactamente " + TELEFONO_MAX + " dígitos.");
-            resultado = false;
+            return false;
         } else if (!telefono.matches("\\d+")) {
             // Opcional: validar que solo contenga números
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El teléfono solo puede contener dígitos.");
-            resultado = false;
+            return false;
         }
 
         String email = tfEmail.getText();
         if (email.length() > EMAIL_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El email debe tener máximo " + EMAIL_MAX + " caracteres.");
-            resultado = false;
+            return false;
         }
 
         int longitudDireccion = tfDireccion.getText().length();
         if (longitudDireccion > DIRECCION_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "La dirección debe tener máximo " + DIRECCION_MAX + " caracteres.");
-            resultado = false;
+            return false;
         }
 
         String codigoPostal = tfCodigoPostal.getText();
         if (codigoPostal.length() != CODIGO_POSTAL_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El código postal debe tener exactamente " + CODIGO_POSTAL_MAX + " caracteres.");
-            resultado = false;
+            return false;
         } else if (!codigoPostal.matches("\\d+")) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "El código postal solo puede contener dígitos.");
-            resultado = false;
+            return false;
         }
         
         int longitudCiudad = tfCiudad.getText().length();
         if (longitudCiudad > CIUDAD_MAX) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "La ciudad debe tener máximo " + CIUDAD_MAX + " caracteres.");
-            resultado = false;
+            return false;
         }
 
-        return resultado;
+        return true;
     }
     
     private boolean validarFormatoCampos() {
-        boolean resultado = true;
         String nombre = tfNombre.getText().trim();
         
         if (!nombre.matches(NOMBRE_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "El nombre solo puede contener letras, espacios y acentos.");
-            resultado = false;
+            return false;
         }
         
         String apellidoPaterno = tfApellidoPaterno.getText().trim();
         if (!apellidoPaterno.matches(NOMBRE_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "El apellido paterno solo puede contener letras, espacios y acentos.");
-            resultado = false;
+            return false;
         }
         
         String apellidoMaterno = tfApellidoMaterno.getText().trim();
         if (!apellidoMaterno.isEmpty() && !apellidoMaterno.matches(NOMBRE_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "El apellido materno solo puede contener letras, espacios y acentos.");
-            resultado = false;
+            return false;
         }
         
         String ciudad = tfCiudad.getText().trim();
         if (!ciudad.matches(NOMBRE_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "La ciudad solo puede contener letras, espacios y acentos.");
-            resultado = false;
+            return false;
         }
         
         String telefono = tfTelefono.getText().trim();
         if (!telefono.matches(TELEFONO_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "El teléfono debe contener exactamente 10 dígitos numéricos.");
-            resultado = false;
+            return false;
         }
 
         String email = tfEmail.getText().trim();
         if (!email.matches(EMAIL_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "El email no tiene un formato válido (ej: nombre@dominio.com).");
-            resultado = false;
+            return false;
         }
 
         String direccion = tfDireccion.getText().trim();
         if (!direccion.matches(DIRECCION_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "La dirección contiene caracteres no permitidos. Use letras, números, espacios, comas, puntos, # o -.");
-            resultado = false;
+            return false;
         }
 
         String codigoPostal = tfCodigoPostal.getText().trim();
         if (!codigoPostal.matches(CODIGO_POSTAL_REGEX)) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Formato inválido",
                     "El código postal debe ser exactamente 5 dígitos numéricos.");
-            resultado = false;
+            return false;
         }
 
-        return resultado;
+        return true;
     }
     
     private boolean validarClienteExistente(){
-        boolean resultado = false;
+        
         try{
-            resultado = ClienteDAO.validarClienteExistente(tfEmail.getText());//Devuelve true si encuentra un usuario registrado
-            if(resultado){
+            boolean existe = ClienteDAO.validarClienteExistente(tfEmail.getText());//Devuelve true si encuentra un usuario registrado
+            if(existe){
               Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Información existente", "El correo ingresado ya "
                       + "está registrado, por favor intente con otro");
+              return true;
             } 
         }catch(Exception ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
             LOGGER.log(Level.SEVERE, "Error general capturado en validarClienteExistente", ex);
             ex.printStackTrace();
         }
-        return resultado;
+        return false;
     }
     
     private void registrarCliente(){
-        boolean resultado = false;
         Cliente cliente = new Cliente();
         cliente.setNombre(tfNombre.getText());
         cliente.setAPaterno(tfApellidoPaterno.getText());
@@ -276,10 +273,13 @@ public class FXMLAgregarClienteController implements Initializable {
         cliente.setCiudad(tfCiudad.getText());
         cliente.setStatus(true);
         try{
-            resultado = ClienteDAO.registrarCliente(cliente);
+            boolean resultado = ClienteDAO.registrarCliente(cliente);
             if(resultado){
                 Utilidad.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Éxito", "El usuario ha sido registrado correctamente.");
                 limpiarCampos();
+            }else{
+                 Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error",
+                        "No se pudo registrar al cliente. Intente de nuevo.");
             }
         }catch(SQLException ex){
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al conectarse a la base de datos", ex.getMessage());

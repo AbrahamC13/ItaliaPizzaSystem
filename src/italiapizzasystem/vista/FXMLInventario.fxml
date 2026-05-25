@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,32 +8,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLInventarioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLInventarioController">
    <children>
-      <AnchorPane prefHeight="132.0" prefWidth="600.0">
+      <HBox layoutX="149.0" prefHeight="21.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="246.0" layoutY="31.0" text="Productos">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="72.0" layoutY="80.0" text="Búsqueda:" />
-            <TextField fx:id="tfNombreProducto" layoutX="163.0" layoutY="75.0" prefHeight="31.0" prefWidth="274.0" />
-            <Button layoutX="462.0" layoutY="75.0" mnemonicParsing="false" onAction="#btnClicBuscar" text="Buscar" />
+            <Label text="Inventario" />
          </children>
-      </AnchorPane>
-      <AnchorPane layoutX="-1.0" layoutY="132.0" prefHeight="200.0" prefWidth="600.0">
+      </HBox>
+      <Label layoutX="246.0" layoutY="21.0" text="Productos">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <HBox layoutY="77.0" prefHeight="47.0" prefWidth="600.0" spacing="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <ListView layoutX="146.0" layoutY="23.0" prefHeight="155.0" prefWidth="308.0" />
-            <ScrollBar layoutX="436.0" layoutY="26.0" orientation="VERTICAL" prefHeight="149.0" prefWidth="18.0" />
+            <Region prefHeight="100.0" prefWidth="75.0" />
+            <Label prefHeight="21.0" prefWidth="83.0" text="Búsqueda:" />
+            <TextField fx:id="tfNombre" prefHeight="31.0" prefWidth="209.0" promptText="Pizza Regular" />
+            <Button fx:id="btnClicBuscar" mnemonicParsing="false" prefHeight="31.0" prefWidth="71.0" text="Buscar" />
+            <Region prefHeight="100.0" prefWidth="45.0" />
          </children>
-      </AnchorPane>
-      <AnchorPane layoutY="332.0" prefHeight="68.0" prefWidth="600.0">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+      </HBox>
+      <VBox layoutX="80.0" layoutY="126.0" prefHeight="200.0" prefWidth="418.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
          <children>
-            <Button layoutX="453.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnClicGenerarReporte" text="Generar Reporte" />
-            <Button layoutX="46.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnClicRegresar" text="Regresar" />
+            <TableView fx:id="tvProductos" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="tcCodigoProducto" prefWidth="180.0" text="Código del producto" />
+                <TableColumn fx:id="tcNombreProducto" prefWidth="259.0" text="Nombre" />
+              </columns>
+            </TableView>
          </children>
-      </AnchorPane>
+         <opaqueInsets>
+            <Insets left="10.0" right="10.0" />
+         </opaqueInsets>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="111.0" layoutY="334.0" prefHeight="63.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#btnClicRegresar" prefHeight="31.0" prefWidth="94.0" text="Regresar" />
+            <Region prefHeight="88.0" prefWidth="226.0" />
+            <Button mnemonicParsing="false" onAction="#btnClicGenerarReporte" text="Generar reporte" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

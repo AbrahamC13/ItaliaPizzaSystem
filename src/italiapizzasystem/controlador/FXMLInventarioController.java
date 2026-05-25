@@ -1,6 +1,7 @@
 package italiapizzasystem.controlador;
 
 import italiapizzasystem.ItaliaPizzaSystem;
+import italiapizzasystem.persistencia.pojo.Producto;
 import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -24,9 +28,18 @@ import javafx.stage.Stage;
  */
 public class FXMLInventarioController implements Initializable {
 
-    @FXML
     private TextField tfNombreProducto;
      private static final Logger LOGGER = Logger.getLogger(FXMLInventarioController.class.getName());
+    @FXML
+    private TextField tfNombre;
+    @FXML
+    private Button btnClicBuscar;
+    @FXML
+    private TableView<Producto> tvProductos;
+    @FXML
+    private TableColumn<Producto, String> tcCodigoProducto;
+    @FXML
+    private TableColumn<Producto, String> tcNombreProducto;
     /**
      * Initializes the controller class.
      */
@@ -35,9 +48,6 @@ public class FXMLInventarioController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void btnClicBuscar(ActionEvent event) {
-    }
 
     @FXML
     private void btnClicGenerarReporte(ActionEvent event) {

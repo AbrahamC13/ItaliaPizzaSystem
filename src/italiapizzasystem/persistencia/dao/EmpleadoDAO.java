@@ -125,7 +125,7 @@ public class EmpleadoDAO {
     
     public static boolean registrarEmpleado(Empleado empleado) throws SQLException{
         boolean resultado = false;
-        String insert = "INSERT INTO empleados (nombre, apellido_paterno, apellido_materno, ciudad, codigo_postal, "
+        String insert = "INSERT INTO empleado (nombre, aPaterno, aMaterno, ciudad, codigoPostal, "
                    + "direccion, email, telefono, rol, usuario, contrasenia, status) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
@@ -156,7 +156,7 @@ public class EmpleadoDAO {
     //Restricción: No puede haber dos empleados con el mismo usuario
      public static boolean validarEmpleadoExistente(String usuario) throws SQLException {
          boolean resultado = false;
-        String consulta = "SELECT COUNT(*) FROM empleados WHERE usuario = ?";
+        String consulta = "SELECT COUNT(*) FROM empleado WHERE usuario = ?";
         Connection conexionBD = ConexionBD.abrirConexion();
         if(conexionBD != null){
             PreparedStatement pstmt = conexionBD.prepareStatement(consulta);
@@ -175,7 +175,7 @@ public class EmpleadoDAO {
     //Restricción: No puede haber dos empleados con el mismo correo electrónico 
     public static boolean validarEmpleadoExistentePorEmail(String email) throws SQLException {
         boolean resultado = false;      
-        String consulta = "SELECT COUNT(*) FROM empleados WHERE email = ?";
+        String consulta = "SELECT COUNT(*) FROM empleado WHERE email = ?";
         Connection conexionBD = ConexionBD.abrirConexion();
         if(conexionBD != null){
             PreparedStatement pstmt = conexionBD.prepareStatement(consulta);
