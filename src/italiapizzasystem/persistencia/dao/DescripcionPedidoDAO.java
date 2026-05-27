@@ -13,27 +13,31 @@ import java.util.ArrayList;
  * @author Gerardo
  */
 public class DescripcionPedidoDAO {
-    public static ArrayList<DescripcionPedido> obtenerDescripcionPedido(int idPedido) throws SQLException{
-        ArrayList<DescripcionPedido>  pedidos = new ArrayList<DescripcionPedido>();
+    
+    public static ArrayList<DescripcionPedido> obtenerDescripcionPedido(int idPedido) throws SQLException {
+        ArrayList<DescripcionPedido> pedidos = new ArrayList<DescripcionPedido>();
         Connection conexionBD = ConexionBD.abrirConexion();
-        if(conexionBD!= null){
-            String consulta = "SELECT * FROM descripcionPedido where idPedido=? ";
+        
+        if (conexionBD != null) {
+            String consulta = "SELECT Producto_idProducto, Pedido_idPedido, cantidad, total FROM descripcionPedido WHERE Pedido_idPedido = ?";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             sentencia.setInt(1, idPedido);
             ResultSet resultado = sentencia.executeQuery();
-            while(resultado.next()){
+            
+            while (resultado.next()) {
                 pedidos.add(serializarDescripcionPedido(resultado));
             }
+            
             sentencia.close();
             resultado.close();
             conexionBD.close();
-        }else{
+        } else {
             throw new SQLException("Sin conexión a la BD");
         }
         return pedidos;
     }
     
-    private static DescripcionPedido serializarDescripcionPedido(ResultSet resultado) throws SQLException{
+    private static DescripcionPedido serializarDescripcionPedido(ResultSet resultado) throws SQLException {
         DescripcionPedido descripcionPedido = new DescripcionPedido();
         descripcionPedido.setCantidad(resultado.getInt("cantidad"));
         descripcionPedido.setIdPedido(resultado.getInt("Pedido_idPedido"));

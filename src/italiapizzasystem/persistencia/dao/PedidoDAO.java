@@ -92,13 +92,12 @@ public class PedidoDAO {
 
     private static int insertarCabeceraPedido(Connection conexion, Pedido pedido) throws SQLException, RegistrarPedidoException {
         String consultaPedido = "INSERT INTO pedido (fechaPedido, estatus, Cliente_idCliente, Empleado_idEmpleado) "
-                + "VALUES (?, ?, ?, ?)";
+                + "VALUES (NOW(), ?, ?, ?)";
         
         try (PreparedStatement sentencia = conexion.prepareStatement(consultaPedido, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            sentencia.setString(1, pedido.getFechaPedido());
-            sentencia.setString(2, pedido.getStatus());
-            sentencia.setInt(3, pedido.getIdCliente());
-            sentencia.setInt(4, pedido.getIdEmpleado());
+            sentencia.setString(1, pedido.getStatus());
+            sentencia.setInt(2, pedido.getIdCliente());
+            sentencia.setInt(3, pedido.getIdEmpleado());
 
             if (sentencia.executeUpdate() == 0) {
                 throw new RegistrarPedidoException("No se pudieron registrar los datos del pedido.");
@@ -162,6 +161,61 @@ public class PedidoDAO {
         }
 
         return exito;
+    }
+    
+    public static boolean modificarPedido(Pedido pedido, ArrayList<OrdenFila> productosOrden) throws SQLException {
+        Connection conexionBD = ConexionBD.abrirConexion();
+        boolean exito = false;
+
+        if (conexionBD == null) {
+            throw new SQLException("Error al conectar a la BD.");
+        }
+
+        try {
+            conexionBD.setAutoCommit(false);
+
+            if (actualizarCabeceraPedido(conexionBD, pedido)) {
+                eliminarDetallesPedido(conexionBD, pedido.getIdPedido());
+                insertarDetallesPedido(conexionBD, pedido.getIdPedido(), productosOrden);
+
+                conexionBD.commit();
+                exito = true;
+            }
+        } catch (SQLException ex) {
+            deshacerTransaccion(conexionBD);
+            throw ex; 
+        } finally {
+            conexionBD.close();
+        }
+        return exito;
+    }
+    
+    private static boolean actualizarCabeceraPedido(Connection conexion, Pedido pedido) throws SQLException {
+        String sql = "UPDATE pedido SET estatus = ?, Empleado_idEmpleado = ? WHERE idPedido = ?";
+        try (PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            sentencia.setString(1, pedido.getStatus());
+            sentencia.setInt(2, pedido.getIdEmpleado());
+            sentencia.setInt(3, pedido.getIdPedido());
+
+            return sentencia.executeUpdate() > 0;
+        }
+    }
+
+    private static void eliminarDetallesPedido(Connection conexion, int idPedido) throws SQLException {
+        String sql = "DELETE FROM descripcionPedido WHERE Pedido_idPedido = ?";
+        try (PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            sentencia.setInt(1, idPedido);
+            sentencia.executeUpdate();
+        }
+    }
+    
+    public static boolean cancelarPedido(int idPedido) throws SQLException {
+        String sql = "UPDATE pedido SET estatus = 'Cancelado' WHERE idPedido = ?";
+        try (Connection conexionBD = ConexionBD.abrirConexion();
+             PreparedStatement sentencia = conexionBD.prepareStatement(sql)) {
+            sentencia.setInt(1, idPedido);
+            return sentencia.executeUpdate() > 0;
+        }
     }
     
     private static Pedido serializarPedido(ResultSet resultado) throws SQLException{

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -46,5 +47,10 @@
             <AnchorPane layoutX="55.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #CE2B37;" />
          </children>
       </AnchorPane>
+      <ImageView fitHeight="513.0" fitWidth="498.0" layoutX="578.0" layoutY="104.0" pickOnBounds="true">
+         <image>
+            <Image url="@/italiapizzasystemRecursos/imagenes/logoConFondo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

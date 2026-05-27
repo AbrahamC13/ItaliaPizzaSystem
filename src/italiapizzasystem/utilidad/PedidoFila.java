@@ -91,6 +91,8 @@ public class PedidoFila {
             if ("Entregado".equalsIgnoreCase(estado) || "Cancelado".equalsIgnoreCase(estado)) {
                 throw new PedidoEstadoInvalidoException("Solo se pueden editar los pedidos mientras estén 'En Proceso'.");
             }
+            
+            Navegador.cambiarVentanaConControlador(comboEstado, "vista/FXMLEditarPedido.fxml", "Editar Pedido");
         } catch (PedidoEstadoInvalidoException ex) {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.WARNING, "Acción no permitida", ex.getMessage());
         }

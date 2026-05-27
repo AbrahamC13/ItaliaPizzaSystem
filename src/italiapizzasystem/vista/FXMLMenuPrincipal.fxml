@@ -11,11 +11,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLMenuPrincipalController">
    <children>
-      <ImageView fitHeight="306.0" fitWidth="331.0" layoutX="33.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../italiapizzasystemRecursos/imagenes/logoConFondo.png" />
-         </image>
-      </ImageView>
       <AnchorPane prefHeight="142.0" prefWidth="1280.0" style="-fx-background-color: #008C45;">
          <children>
             <Label layoutX="392.0" layoutY="30.0" text="Italia Pizza" textFill="WHITE">
@@ -26,7 +21,8 @@
             <Button fx:id="btn_CerrarSesion" layoutX="1075.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnClicCerrarSesion" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 20; -fx-background-color: #CE2B37;" text="Cerrar sesión" textFill="WHITE">
                <font>
                   <Font size="18.0" />
-               </font></Button>
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="458.0" layoutY="142.0" prefHeight="126.0" prefWidth="821.0">
@@ -45,7 +41,7 @@
       </AnchorPane>
       <AnchorPane layoutX="459.0" layoutY="276.0" prefHeight="442.0" prefWidth="821.0">
          <children>
-            <Button fx:id="btn_Administracion" layoutX="271.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnClicAdministracion" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55;" text="Administración">
+            <Button fx:id="btn_Administracion" layoutX="271.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnClicAdministracion" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55; -fx-background-color: #B6FF57;" text="Administración">
                <font>
                   <Font size="22.0" />
                </font></Button>
@@ -53,16 +49,26 @@
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Button>
-            <Button fx:id="btn_Inventarios" layoutX="271.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnClicInventarios" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55;" text="Inventarios">
+            <Button fx:id="btn_Inventarios" layoutX="271.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnClicInventarios" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55; -fx-background-color: B6FF57;" text="Inventarios">
                <font>
                   <Font size="22.0" />
                </font></Button>
-            <Button fx:id="btn_Pedidos" layoutX="271.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnClicPedidos" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55;" text="Pedidos">
+            <Button fx:id="btn_Pedidos" layoutX="271.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnClicPedidos" prefHeight="82.0" prefWidth="271.0" style="-fx-background-radius: 55; -fx-background-color: #B6FF57;" text="Pedidos">
                <font>
                   <Font size="22.0" />
                </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="142.0" prefHeight="580.0" prefWidth="462.0" style="-fx-background-color: #004D57;" />
+      <ImageView fitHeight="450.0" fitWidth="483.0" layoutX="4.0" layoutY="12.0" pickOnBounds="true">
+         <image>
+            <Image url="@/italiapizzasystemRecursos/imagenes/logoConFondo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="524.0" fitWidth="629.0" layoutX="3.0" layoutY="198.0" pickOnBounds="true">
+         <image>
+            <Image url="@/italiapizzasystemRecursos/imagenes/zorroMain.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

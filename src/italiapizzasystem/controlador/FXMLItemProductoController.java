@@ -45,7 +45,8 @@ public class FXMLItemProductoController implements Initializable {
     
     private Producto productoBase;
     private FXMLRealizarPedidoController controladorPrincipal;
-
+    private FXMLEditarPedidoController contenedorEdicion;
+    
     /**
      * Initializes the controller class.
      */
@@ -77,10 +78,38 @@ public class FXMLItemProductoController implements Initializable {
         }
         EfectoBotones.darEfectoBotones(btn_Agregar);
     } 
+    
+    public void inicializarTarjeta(Producto producto, FXMLEditarPedidoController edicion){
+        this.productoBase = producto;
+        this.contenedorEdicion = edicion;
+
+        lb_NombreProducto.setText(producto.getNombre());
+        lb_CodigoProducto.setText("#" + producto.getCodigoProducto());
+        lb_DescripcionProducto.setText(producto.getDescripcion() != null ? producto.getDescripcion(): "Sin descripcion.");
+        lb_RestriccionesProducto.setText(producto.getRestricciones() != null ? producto.getRestricciones(): "Ninguna");
+        lb_PrecioProducto.setText(String.format("$%.2f", producto.getPrecio()));
+        try {
+            Image imagenDelProducto = GestorImagen.convertirBytesAImagen(producto.getFoto());
+
+            if (imagenDelProducto != null) {
+                img_ImagenProducto.setImage(imagenDelProducto);
+            } else {
+                GestorImagen.cargarImagenDefault(img_ImagenProducto);
+            }
+        } catch (ImagenInvalidaException ex) {
+            System.err.println("Alerta Visual: " + ex.getMessage());
+            GestorImagen.cargarImagenDefault(img_ImagenProducto);
+        }
+        EfectoBotones.darEfectoBotones(btn_Agregar);
+    }
 
     @FXML
     private void btn_clicAgregar(ActionEvent event) {
-        this.controladorPrincipal.agregarProductoAOrden(this.productoBase);
+        if (this.controladorPrincipal != null) {
+            this.controladorPrincipal.agregarProductoAOrden(this.productoBase);
+        } else if (this.contenedorEdicion != null) {
+            this.contenedorEdicion.agregarProductoAOrden(this.productoBase);
+        }
     }
     
 }

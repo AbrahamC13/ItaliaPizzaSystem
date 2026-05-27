@@ -99,6 +99,10 @@ public class FXMLPedidosController implements Initializable {
             
             for (PedidoCliente pedidoBD : datosBD) {
                 PedidoFila filaInteractiva = new PedidoFila(pedidoBD);
+                filaInteractiva.getBotonEditar().setOnAction(event -> {
+                    abrirPantallaEdicion(pedidoBD);
+                });
+                
                 listaPedidosFila.add(filaInteractiva);
             }
           
@@ -111,6 +115,19 @@ public class FXMLPedidosController implements Initializable {
             Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
             LOGGER.log(Level.SEVERE, "Error general al cargar datos de la tabla", ex);
             ex.printStackTrace();
+        }
+    }
+    
+    private void abrirPantallaEdicion(PedidoCliente pedidoSeleccionado) {
+        FXMLLoader cargador = Navegador.cambiarVentanaConControlador(
+            tbl_Pedidos, 
+            "vista/FXMLEditarPedido.fxml", 
+            "Editar Pedido"
+        );
+
+        if (cargador != null) {
+            FXMLEditarPedidoController controladorEdicion = cargador.getController();
+            controladorEdicion.inicializarDatos(pedidoSeleccionado);
         }
     }
     
