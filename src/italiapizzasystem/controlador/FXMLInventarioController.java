@@ -3,22 +3,30 @@ package italiapizzasystem.controlador;
 import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.pojo.Producto;
 import italiapizzasystem.utilidad.Utilidad;
+
 import java.io.IOException;
 import java.net.URL;
+
 import java.util.ResourceBundle;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
 import javafx.stage.Stage;
 
 /**
@@ -26,53 +34,120 @@ import javafx.stage.Stage;
  *
  * @author Gerardo
  */
-public class FXMLInventarioController implements Initializable {
+public class FXMLInventarioController
+        implements Initializable {
+
+    private static final Logger LOGGER =
+            Logger.getLogger(
+                    FXMLInventarioController.class.getName()
+            );
 
     private TextField tfNombreProducto;
-     private static final Logger LOGGER = Logger.getLogger(FXMLInventarioController.class.getName());
+
     @FXML
     private TextField tfNombre;
+
     @FXML
     private Button btnClicBuscar;
+
     @FXML
     private TableView<Producto> tvProductos;
+
     @FXML
-    private TableColumn<Producto, String> tcCodigoProducto;
+    private TableColumn<Producto, String>
+            tcCodigoProducto;
+
     @FXML
-    private TableColumn<Producto, String> tcNombreProducto;
+    private TableColumn<Producto, String>
+            tcNombreProducto;
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(
+            URL url,
+            ResourceBundle rb
+    ) {
+
         // TODO
-    }    
-
-
-    @FXML
-    private void btnClicGenerarReporte(ActionEvent event) {
     }
 
     @FXML
-    private void btnClicRegresar(ActionEvent event) {
+    private void btnClicGenerarReporte(
+            ActionEvent event
+    ) {
+
+    }
+
+    @FXML
+    private void btnClicRegresar(
+            ActionEvent event
+    ) {
+
         try {
-            Stage escenarioBase = (Stage) tfNombreProducto.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLMenuPrincipal.fxml"));
-            Parent vista = cargador.load();
-            FXMLMenuPrincipalController controlador = cargador.getController();
-            Scene escenaMenu = new Scene(vista);
-            escenarioBase.setScene(escenaMenu);
-            escenarioBase.setTitle("Menu Principal");
+
+            Stage escenarioBase =
+                    (Stage) btnClicBuscar
+                    .getScene()
+                    .getWindow();
+
+            FXMLLoader cargador =
+                    new FXMLLoader(
+                            ItaliaPizzaSystem.class.getResource(
+                                    "vista/FXMLMenuPrincipal.fxml"
+                            )
+                    );
+
+            Parent vista =
+                    cargador.load();
+
+            Scene escenaMenu =
+                    new Scene(vista);
+
+            escenarioBase.setScene(
+                    escenaMenu
+            );
+
+            escenarioBase.setTitle(
+                    "Menu Principal"
+            );
+
             escenarioBase.show();
+
         } catch (IOException ex) {
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error al volver al menú principal.", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error al cargar FXMLMenuPrincipal", ex);
+
+            Utilidad.mostrarAlertaSimple(
+                    Alert.AlertType.ERROR,
+                    "Error al volver al menú principal.",
+                    ex.getMessage()
+            );
+
+            LOGGER.log(
+                    Level.SEVERE,
+                    "Error al cargar "
+                    + "FXMLMenuPrincipal",
+                    ex
+            );
+
             ex.printStackTrace();
-        }catch(Exception ex){
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
-            LOGGER.log(Level.SEVERE, "Error general capturado en btnClicRegresar", ex);
+
+        } catch (Exception ex) {
+
+            Utilidad.mostrarAlertaSimple(
+                    Alert.AlertType.ERROR,
+                    "Error general",
+                    ex.getMessage()
+            );
+
+            LOGGER.log(
+                    Level.SEVERE,
+                    "Error general capturado "
+                    + "en btnClicRegresar",
+                    ex
+            );
+
             ex.printStackTrace();
         }
     }
-    
 }
