@@ -4,6 +4,7 @@ import italiapizzasystem.excepciones.ValidarCredencialesException;
 import italiapizzasystem.persistencia.ConexionBD;
 import italiapizzasystem.persistencia.dao.EmpleadoDAO;
 import italiapizzasystem.persistencia.pojo.Empleado;
+import italiapizzasystem.utilidad.Navegador;
 import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -42,6 +44,9 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private TextField tfNombreUsuario;
+    
+    @FXML
+    private Hyperlink hp_RegistrarNuevoEmpleado;
 
     @FXML
     private PasswordField pfContraseniaUsuario;
@@ -225,7 +230,12 @@ public class FXMLLoginController implements Initializable {
                     }   
                 }
             }
-        });
+        });      
+    }
+        
+    @FXML
+    private void hp_ClicRegistrarNuevoEmpleado(ActionEvent event) {
+        Navegador.cambiarVentana(tfNombreUsuario, "vista/FXMLAgregarEmpleado.fxml", "Registrar nuevo empleado");
     }
 }
     

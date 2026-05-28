@@ -1,6 +1,7 @@
 package italiapizzasystem.controlador;
 
 import italiapizzasystem.ItaliaPizzaSystem;
+import italiapizzasystem.excepciones.PedidoEstadoInvalidoException;
 import italiapizzasystem.persistencia.dao.PedidoDAO;
 import italiapizzasystem.persistencia.pojo.PedidoCliente;
 import italiapizzasystem.utilidad.EfectoBotones;
@@ -119,15 +120,29 @@ public class FXMLPedidosController implements Initializable {
     }
     
     private void abrirPantallaEdicion(PedidoCliente pedidoSeleccionado) {
-        FXMLLoader cargador = Navegador.cambiarVentanaConControlador(
-            tbl_Pedidos, 
-            "vista/FXMLEditarPedido.fxml", 
-            "Editar Pedido"
-        );
+        try {
+            validarEstadoPermitidoParaEdicion(pedidoSeleccionado.getStatus());
 
-        if (cargador != null) {
-            FXMLEditarPedidoController controladorEdicion = cargador.getController();
-            controladorEdicion.inicializarDatos(pedidoSeleccionado);
+            FXMLLoader cargador = Navegador.cambiarVentanaConControlador(
+                tbl_Pedidos, 
+                "vista/FXMLEditarPedido.fxml", 
+                "Editar Pedido"
+            );
+
+            if (cargador != null) {
+                FXMLEditarPedidoController controladorEdicion = cargador.getController();
+                controladorEdicion.inicializarDatos(pedidoSeleccionado);
+            }
+
+        } catch (PedidoEstadoInvalidoException ex) {
+            LOGGER.log(Level.WARNING, "Intento de edición no permitido: {0}", ex.getMessage());
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.WARNING, "Operación No Permitida", ex.getMessage());
+        }
+    }
+    
+    private void validarEstadoPermitidoParaEdicion(String estatus) throws PedidoEstadoInvalidoException {
+        if ("Cancelado".equalsIgnoreCase(estatus) || "Entregado".equalsIgnoreCase(estatus)) {
+            throw new PedidoEstadoInvalidoException("No es posible editar un pedido con estatus: " + estatus + ".");
         }
     }
     

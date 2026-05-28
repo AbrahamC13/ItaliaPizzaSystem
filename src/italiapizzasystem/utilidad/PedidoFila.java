@@ -10,6 +10,7 @@ import italiapizzasystem.persistencia.pojo.PedidoCliente;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
@@ -24,13 +25,12 @@ public class PedidoFila {
     
     private static final Logger LOGGER = Logger.getLogger(PedidoFila.class.getName());
     
-    private int idPedido;
-    private String nombreCliente;
-    private String direccion;
-    private String fechaPedido;
-    
-    private ComboBox<String> comboEstado;
-    private Button botonEditar;
+    private final int idPedido;
+    private final String nombreCliente;
+    private final String direccion;
+    private final String fechaPedido;
+    private final ComboBox<String> comboEstado;
+    private final Button botonEditar;
 
     public PedidoFila(PedidoCliente pedidoBase) {
         this.idPedido = pedidoBase.getIdPedido();
@@ -39,37 +39,30 @@ public class PedidoFila {
         this.fechaPedido = pedidoBase.getFechaPedido();
         this.comboEstado = new ComboBox<>(FXCollections.observableArrayList("En Proceso", "Entregado", "Cancelado"));
         this.comboEstado.setValue(pedidoBase.getStatus());
-        
         this.botonEditar = new Button("Editar");
-        this.botonEditar.setOnAction(event -> accionEditar(pedidoBase.getStatus()));
         
-        verificarEstadoPedido(pedidoBase.getStatus());
-        configurarEventosComboBox();
-        estilizarComboBox();
-        estilizarBotonEditar();
+        verificarYBloquearEstadoFinal(pedidoBase.getStatus());
+        configurarEventos();
+        estilizarComponentes();
     }
     
-    private void configurarEventosComboBox() {
+    private void configurarEventos() {
         this.comboEstado.valueProperty().addListener((observable, valorAnterior, valorNuevo) -> {
             if (valorNuevo == null || valorNuevo.equals(valorAnterior)) {
                 return;
             }
 
             try {
-                boolean actualizacionExitosa = PedidoDAO.actualizarEstatusPedido(this.idPedido, valorNuevo);
-
-                if (actualizacionExitosa) {
+                if (PedidoDAO.actualizarEstatusPedido(this.idPedido, valorNuevo)) {
                     Utilidad.mostrarAlertaSimple(
                         Alert.AlertType.INFORMATION, 
                         "Estatus actualizado", 
                         "El estado del pedido #" + this.idPedido + " se actualizó a: " + valorNuevo
                     );
-                    verificarEstadoPedido(valorNuevo);
+                    verificarYBloquearEstadoFinal(valorNuevo);
                 }
-
             } catch (SQLException ex) {
-                this.comboEstado.setValue(valorAnterior);
-                
+                Platform.runLater(() -> this.comboEstado.setValue(valorAnterior));
                 LOGGER.log(Level.SEVERE, "Error al actualizar el estatus del pedido #" + this.idPedido, ex);
                 Utilidad.mostrarAlertaSimple(
                     Alert.AlertType.ERROR, 
@@ -78,23 +71,26 @@ public class PedidoFila {
                 );
             }
         });
+
+        this.botonEditar.setOnAction(event -> {
+            try {
+                String estadoActual = this.comboEstado.getValue();
+                if ("Entregado".equalsIgnoreCase(estadoActual) || "Cancelado".equalsIgnoreCase(estadoActual)) {
+                    throw new PedidoEstadoInvalidoException("Solo se pueden editar los pedidos mientras estén 'En Proceso'.");
+                }
+                Navegador.cambiarVentanaConControlador(comboEstado, "vista/FXMLEditarPedido.fxml", "Editar Pedido");
+            } catch (PedidoEstadoInvalidoException ex) {
+                Utilidad.mostrarAlertaSimple(Alert.AlertType.WARNING, "Acción no permitida", ex.getMessage());
+            }
+        });
     }
     
-    private void verificarEstadoPedido(String estado) {
+    private void verificarYBloquearEstadoFinal(String estado) {
         if ("Entregado".equalsIgnoreCase(estado) || "Cancelado".equalsIgnoreCase(estado)) {
-            this.comboEstado.setDisable(true);
+            this.botonEditar.setDisable(true);
         }
-    }
-
-    private void accionEditar(String estado) {
-        try {
-            if ("Entregado".equalsIgnoreCase(estado) || "Cancelado".equalsIgnoreCase(estado)) {
-                throw new PedidoEstadoInvalidoException("Solo se pueden editar los pedidos mientras estén 'En Proceso'.");
-            }
-            
-            Navegador.cambiarVentanaConControlador(comboEstado, "vista/FXMLEditarPedido.fxml", "Editar Pedido");
-        } catch (PedidoEstadoInvalidoException ex) {
-            Utilidad.mostrarAlertaSimple(Alert.AlertType.WARNING, "Acción no permitida", ex.getMessage());
+        if ("En Proceso".equalsIgnoreCase(estado) || "Registrado".equalsIgnoreCase(estado)) {
+            this.botonEditar.setDisable(false);
         }
     }
 
@@ -105,45 +101,39 @@ public class PedidoFila {
     public ComboBox<String> getComboEstado() { return comboEstado; }
     public Button getBotonEditar() { return botonEditar; }
     
-    private void estilizarComboBox() {
+    private void estilizarComponentes() {
         this.comboEstado.setPrefWidth(150.0);
         this.comboEstado.setCursor(Cursor.HAND);
         this.comboEstado.setStyle(
-            "-fx-background-color: #FFFFFF; " +
-            "-fx-border-color: #CCCCCC; " +
-            "-fx-border-radius: 5; " +
-            "-fx-background-radius: 5; " +
-            "-fx-font-size: 13px;"
+            "-fx-background-color: #FFFFFF; "
+                    + "-fx-border-color: #CCCCCC; " +
+            "-fx-border-radius: 5; "
+                    + "-fx-background-radius: 5; "
+                    + "-fx-font-size: 13px;"
         );
-    }
 
-    private void estilizarBotonEditar() {
         this.botonEditar.setPrefWidth(90.0);
-        configurarEfectoHoverBoton();
-    }
-
-    private void configurarEfectoHoverBoton() {
+        this.botonEditar.setCursor(Cursor.HAND);
+        
         String estiloBase = 
-            "-fx-background-color: #007BFF; " + 
-            "-fx-text-fill: white; " +
-            "-fx-font-weight: bold; " +
-            "-fx-border-radius: 5; " +
-            "-fx-background-radius: 5; " +
-            "-fx-padding: 5 15 5 15; " +
-            "-fx-font-size: 12px;";
+            "-fx-background-color: #007BFF; "
+                + "-fx-text-fill: white; "
+                + "-fx-font-weight: bold; " +
+            "-fx-border-radius: 5; "
+                + "-fx-background-radius: 5; "
+                + "-fx-padding: 5 15 5 15; "
+                + "-fx-font-size: 12px;";
             
         String estiloHover = 
-            "-fx-background-color: #0056b3; " + 
-            "-fx-text-fill: white; " +
-            "-fx-font-weight: bold; " +
-            "-fx-border-radius: 5; " +
-            "-fx-background-radius: 5; " +
-            "-fx-padding: 5 15 5 15; " +
-            "-fx-font-size: 12px;";
+            "-fx-background-color: #0056b3; "
+                + "-fx-text-fill: white; "
+                + "-fx-font-weight: bold; " +
+            "-fx-border-radius: 5; "
+                + "-fx-background-radius: 5; "
+                + "-fx-padding: 5 15 5 15; "
+                + "-fx-font-size: 12px;";
 
         this.botonEditar.setStyle(estiloBase);
-        this.botonEditar.setCursor(Cursor.HAND);
-
         this.botonEditar.setOnMouseEntered(e -> this.botonEditar.setStyle(estiloHover));
         this.botonEditar.setOnMouseExited(e -> this.botonEditar.setStyle(estiloBase));
     }

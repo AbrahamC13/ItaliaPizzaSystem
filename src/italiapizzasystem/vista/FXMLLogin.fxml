@@ -31,7 +31,7 @@
                <font>
                   <Font name="Arial Black" size="20.0" />
                </font></Label>
-            <Button layoutX="213.0" layoutY="487.0" mnemonicParsing="false" onAction="#btnEntrar" prefHeight="63.0" prefWidth="209.0" style="-fx-background-radius: 50; -fx-background-color: #00A1B2;" text="Entrar" textFill="WHITE">
+            <Button layoutX="221.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnEntrar" prefHeight="63.0" prefWidth="209.0" style="-fx-background-radius: 50; -fx-background-color: #00A1B2;" text="Entrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="29.0" />
                </font></Button>
@@ -45,6 +45,11 @@
             <AnchorPane layoutX="5.0" layoutY="1.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #008C45;" />
             <AnchorPane layoutX="30.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #F4F5F0;" />
             <AnchorPane layoutX="55.0" prefHeight="610.0" prefWidth="25.0" style="-fx-background-color: #CE2B37;" />
+            <Hyperlink fx:id="hp_RegistrarNuevoEmpleado" layoutX="204.0" layoutY="545.0" onAction="#hp_ClicRegistrarNuevoEmpleado" text="Registro de nuevo empleado">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Hyperlink>
          </children>
       </AnchorPane>
       <ImageView fitHeight="513.0" fitWidth="498.0" layoutX="578.0" layoutY="104.0" pickOnBounds="true">
