@@ -4,6 +4,7 @@ package italiapizzasystem.controlador;
 import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.dao.EmpleadoDAO;
 import italiapizzasystem.persistencia.pojo.Empleado;
+import italiapizzasystem.utilidad.EfectoBotones;
 import italiapizzasystem.utilidad.Utilidad;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -72,12 +74,16 @@ public class FXMLAgregarEmpleadoController implements Initializable {
     private static final String DIRECCION_REGEX = "^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ\\s,.#\\-]+$";
     private static final String USUARIO_REGEX = "^[a-zA-Z0-9_]{4,45}$";  // alfanumérico y guión bajo, 4-45 caracteres
     private static final String ROL_REGEX = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$"; // solo letras y espacios
+    @FXML
+    private Button btn_Cancelar;
+    @FXML
+    private Button btn_Aceptar;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        EfectoBotones.darEfectoBotones(btn_Cancelar, btn_Aceptar);
     }    
 
     @FXML

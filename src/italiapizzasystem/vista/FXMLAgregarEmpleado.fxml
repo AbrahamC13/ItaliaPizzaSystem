@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLAgregarEmpleadoController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #004D57;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLAgregarEmpleadoController">
    <children>
-      <VBox alignment="CENTER" layoutX="300.0" layoutY="83.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="300.0" layoutY="83.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #004D57;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="398.0" prefWidth="670.0" spacing="15.0" style="-fx-border-color: #cccccc;">
+            <VBox prefHeight="644.0" prefWidth="1228.0" spacing="15.0" style="-fx-background-color: #ffffff;">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -23,9 +23,9 @@
                   <HBox prefHeight="62.0" prefWidth="648.0" spacing="15.0">
                      <children>
                         <Region prefHeight="32.0" prefWidth="169.0" HBox.hgrow="ALWAYS" />
-                        <Label text="Agregar Empleado">
+                        <Label alignment="CENTER" prefHeight="44.0" prefWidth="1397.0" text="Agregar Empleado" textAlignment="CENTER" textFill="#004d57">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="Arial Black" size="30.0" />
                            </font>
                         </Label>
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
@@ -34,52 +34,106 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                   </HBox>
-                  <HBox prefHeight="37.0" prefWidth="650.0" spacing="15.0">
+                  <HBox prefHeight="57.0" prefWidth="1230.0" spacing="15.0">
                      <children>
-                        <Label text="Nombre(s):" />
-                        <TextField fx:id="tfNombre" prefHeight="31.0" prefWidth="205.0" promptText="Nombre empleado" />
-                        <Label text="Apellido paterno:" />
-                        <TextField fx:id="tfApellidoPaterno" promptText="Apellido paterno" />
+                        <Label text="Nombre(s):">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfNombre" prefHeight="41.0" prefWidth="271.0" promptText="Nombre empleado" style="-fx-background-radius: 20;" />
+                        <Label text="Apellido paterno:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfApellidoPaterno" prefHeight="41.0" prefWidth="278.0" promptText="Apellido paterno" style="-fx-background-radius: 20;" />
                      </children>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
                   </HBox>
-                  <HBox prefHeight="36.0" prefWidth="650.0" spacing="15.0">
+                  <HBox prefHeight="73.0" prefWidth="1230.0" spacing="15.0">
                      <children>
-                        <Label text="Apellido materno:" />
-                        <TextField fx:id="tfApellidoMaterno" promptText="Apellido materno" />
-                        <Label text="Ciudad:" />
-                        <TextField fx:id="tfCiudad" promptText="Ciudad" />
+                        <Label text="Apellido materno:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfApellidoMaterno" prefHeight="41.0" prefWidth="252.0" promptText="Apellido materno" style="-fx-background-radius: 20;" />
+                        <Label text="Ciudad:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfCiudad" prefHeight="41.0" prefWidth="259.0" promptText="Ciudad" style="-fx-background-radius: 20;" />
                      </children>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
                   </HBox>
-                  <HBox prefHeight="37.0" prefWidth="648.0" spacing="15.0">
+                  <HBox prefHeight="67.0" prefWidth="1230.0" spacing="15.0">
                      <children>
-                        <Label text="Código Postal:" />
-                        <TextField fx:id="tfCodigoPostal" prefHeight="31.0" prefWidth="111.0" promptText="Código postal" />
-                        <Label text="Direccion:" />
-                        <TextField fx:id="tfDireccion" prefHeight="31.0" prefWidth="310.0" promptText="Direccion" />
+                        <Label text="Código Postal:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfCodigoPostal" prefHeight="41.0" prefWidth="129.0" promptText="Código postal" style="-fx-background-radius: 20;" />
+                        <Label text="Direccion:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfDireccion" prefHeight="41.0" prefWidth="527.0" promptText="Direccion" style="-fx-background-radius: 20;" />
                      </children>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
                   </HBox>
-                  <HBox prefHeight="36.0" prefWidth="648.0" spacing="15.0">
+                  <HBox prefHeight="77.0" prefWidth="1230.0" spacing="15.0">
                      <children>
-                        <Label text="Email:" />
-                        <TextField fx:id="tfEmail" promptText="em@il" />
-                        <Label text="Teléfono:" />
-                        <TextField fx:id="tfTelefono" prefHeight="31.0" prefWidth="147.0" promptText="Teléfono" />
-                        <Label text="Rol:" />
+                        <Label text="Email:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfEmail" prefHeight="41.0" prefWidth="274.0" promptText="em@il" style="-fx-background-radius: 20;" />
+                        <Label text="Teléfono:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfTelefono" prefHeight="41.0" prefWidth="147.0" promptText="Teléfono" style="-fx-background-radius: 20;" />
+                        <Label text="Rol:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
                         <TextField fx:id="tfRol" editable="false" prefHeight="31.0" prefWidth="101.0" promptText="Empleado" text="Empleado" />
                      </children>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
                   </HBox>
-                  <HBox prefHeight="36.0" prefWidth="648.0" spacing="15.0">
+                  <HBox prefHeight="76.0" prefWidth="1230.0" spacing="15.0">
                      <children>
-                        <Label text="Usuario:" />
-                        <TextField fx:id="tfUsuario" promptText="Usuario" />
-                        <Label text="Contraseña:" />
-                        <TextField fx:id="tfContrasenia" promptText="Contraseña" />
+                        <Label text="Usuario:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfUsuario" prefHeight="41.0" prefWidth="261.0" promptText="Usuario" style="-fx-background-radius: 20;" />
+                        <Label text="Contraseña:">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <TextField fx:id="tfContrasenia" prefHeight="41.0" prefWidth="278.0" promptText="Contraseña" style="-fx-background-radius: 20;" />
                      </children>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="39.0" prefWidth="648.0" spacing="500.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="88.0" prefWidth="1230.0" spacing="500.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#btnClicCancelar" text="Cancelar" />
-                        <Button mnemonicParsing="false" onAction="#btnClicAceptar" text="Aceptar" />
+                        <Button fx:id="btn_Cancelar" mnemonicParsing="false" onAction="#btnClicCancelar" prefHeight="61.0" prefWidth="139.0" style="-fx-background-radius: 30; -fx-background-color: #FF5826;" text="Cancelar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Button>
+                        <Button fx:id="btn_Aceptar" mnemonicParsing="false" onAction="#btnClicAceptar" prefHeight="60.0" prefWidth="167.0" style="-fx-background-radius: 30; -fx-background-color: #72FF47;" text="Aceptar">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                </children>

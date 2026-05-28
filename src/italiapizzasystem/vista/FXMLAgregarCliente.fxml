@@ -8,48 +8,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLAgregarClienteController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLAgregarClienteController">
    <children>
-      <VBox alignment="CENTER" layoutX="93.0" layoutY="-12.0" prefHeight="673.0" prefWidth="313.0" spacing="20.0">
+      <VBox alignment="CENTER" layoutX="93.0" layoutY="20.0" prefHeight="713.0" prefWidth="582.0" spacing="20.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label text="Agregar Usuario">
+            <Label text="Agregar Usuario" textFill="#004d57">
                <font>
-                  <Font name="System Bold" size="19.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <VBox prefHeight="613.0" prefWidth="273.0" spacing="8.0" style="-fx-border-color: #cccccc; -fx-border-radius: 5;">
+            <VBox prefHeight="623.0" prefWidth="488.0" spacing="8.0" style="-fx-border-color: #cccccc; -fx-border-radius: 5;">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
                   <Label text="Nombre(s):" />
-                  <TextField fx:id="tfNombre" />
+                  <TextField fx:id="tfNombre" style="-fx-background-radius: 20;" />
                   <Label text="Apellido paterno:" />
-                  <TextField fx:id="tfApellidoPaterno" />
+                  <TextField fx:id="tfApellidoPaterno" style="-fx-background-radius: 20; -fx-background-radius: 20;" />
                   <Label text="Apellido materno:" />
-                  <TextField fx:id="tfApellidoMaterno" />
+                  <TextField fx:id="tfApellidoMaterno" style="-fx-background-radius: 20;" />
                   <Label text="Teléfono:" />
-                  <TextField fx:id="tfTelefono" />
+                  <TextField fx:id="tfTelefono" style="-fx-background-radius: 20;" />
                   <Label text="Email:" />
-                  <TextField fx:id="tfEmail" />
+                  <TextField fx:id="tfEmail" style="-fx-background-radius: 20;" />
                   <Label text="Dirección:" />
-                  <TextField fx:id="tfDireccion" />
+                  <TextField fx:id="tfDireccion" style="-fx-background-radius: 20;" />
                   <Label text="Código Postal:" />
-                  <TextField fx:id="tfCodigoPostal" />
+                  <TextField fx:id="tfCodigoPostal" style="-fx-background-radius: 20;" />
                   <Label text="Ciudad:" />
-                  <TextField fx:id="tfCiudad" />
+                  <TextField fx:id="tfCiudad" style="-fx-background-radius: 20;" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#btnClicCancelar" text="Cancelar" />
-                        <Button mnemonicParsing="false" onAction="#btnClicGuardar" text="Guardar" />
+                        <Button fx:id="btn_Cancelar" mnemonicParsing="false" onAction="#btnClicCancelar" prefHeight="31.0" prefWidth="107.0" style="-fx-background-radius: 30; -fx-background-color: #FF5826;" text="Cancelar" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
+                        <Button fx:id="btn_Aceptar" mnemonicParsing="false" onAction="#btnClicGuardar" prefHeight="37.0" prefWidth="130.0" style="-fx-background-radius: 30; -fx-background-color: #72FF47;" text="Guardar">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
          </children>
       </VBox>
+      <AnchorPane layoutX="-3.0" layoutY="-1.0" prefHeight="733.0" prefWidth="96.0" style="-fx-background-color: #004D57;" />
    </children>
 </AnchorPane>
