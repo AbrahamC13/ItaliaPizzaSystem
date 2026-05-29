@@ -1,6 +1,10 @@
 package italiapizzasystem.persistencia.dao;
 
+import italiapizzasystem.persistencia.ConexionBD;
 import italiapizzasystem.persistencia.pojo.Empleado;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -15,21 +19,50 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class EmpleadoDAOTest {
 
-    @BeforeAll
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterAll
-    public static void tearDownClass() throws Exception {
-    }
+    private Connection conexion;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() throws SQLException {
+        // Asegúrate de que ConexionBD apunte a tu entorno de PRUEBAS, no a producción
+        conexion = ConexionBD.abrirConexion();
+        assertNotNull(conexion, "La conexión a la BD de pruebas no debería ser nula.");
+        
+        // Limpiamos la tabla antes de cada prueba para garantizar idoneidad
+        try (PreparedStatement stmt = conexion.prepareStatement("DELETE FROM empleado")) {
+            stmt.executeUpdate();
+        }
     }
-
     @AfterEach
-    public void tearDown() throws Exception {
+    public void tearDown() throws SQLException {
+        if (conexion != null && !conexion.isClosed()) {
+            conexion.close();
+        }
     }
+    
+    @Test
+    public void testRegistrarEmpleado_Exitoso() throws SQLException {
+        // 1. Preparar los datos
+        Empleado nuevo = new Empleado();
+        nuevo.setNombre("Juan");
+        nuevo.setAPaterno("Pérez");
+        nuevo.setAMaterno("López");
+        nuevo.setCiudad("Xalapa");
+        nuevo.setCodigoPostal("91000");
+        nuevo.setDireccion("Av. Central 123");
+        nuevo.setEmail("juan.perez@mail.com");
+        nuevo.setTelefono("2281234567");
+        nuevo.setRol("Administrador");
+        nuevo.setUsuario("juanp");
+        nuevo.setContrasenia("secure123");
+        nuevo.setStatus(true);
+
+        // 2. Ejecutar la acción
+        boolean resultado = EmpleadoDAO.registrarEmpleado(nuevo);
+
+        // 3. Verificar
+        assertTrue(resultado, "El empleado debería registrarse correctamente.");
+    }
+    
     @Test
     public void testObtenerEmpleados() throws Exception {
         System.out.println("Prueba: obtenerEmpleados");
