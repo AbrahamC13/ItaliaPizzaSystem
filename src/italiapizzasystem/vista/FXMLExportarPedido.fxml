@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="italiapizzasystem.controlador.FXMLExportarPedidoController">
+   <children>
+      <AnchorPane layoutY="-1.0" prefHeight="51.0" prefWidth="640.0" style="-fx-background-color: #004D57;" />
+      <Label layoutX="35.0" layoutY="58.0" text="Exportar información de pedidos" textFill="#004d57">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="2.0" layoutY="274.0" prefHeight="84.0" prefWidth="637.0">
+         <children>
+            <Button fx:id="btn_Cancelar" layoutX="236.0" layoutY="12.0" mnemonicParsing="false" onAction="#btn_ClicCancelar" prefHeight="41.0" prefWidth="152.0" style="-fx-background-radius: 30; -fx-background-color: #FF5826;" text="Cancelar" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btn_ExportarAPDF" layoutX="86.0" layoutY="158.0" mnemonicParsing="false" onAction="#clic_btnExportarAPDF" prefHeight="86.0" prefWidth="177.0" style="-fx-background-radius: 40; -fx-background-color: #FFD9D9;" text="PDF">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/italiapizzasystemRecursos/imagenes/pdfIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btn_ExportarACSV" layoutX="393.0" layoutY="163.0" mnemonicParsing="false" onAction="#clic_btnExportarACSV" prefHeight="86.0" prefWidth="174.0" style="-fx-background-radius: 40; -fx-background-color: #E2FFCF;" text="CSV">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/italiapizzasystemRecursos/imagenes/csvpng" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="160.0" layoutY="105.0" text="Seleccione el formato en que desee exportar los datos">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
