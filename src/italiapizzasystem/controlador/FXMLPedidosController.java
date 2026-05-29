@@ -151,16 +151,14 @@ public class FXMLPedidosController implements Initializable {
         Navegador.cambiarVentana(tbl_Pedidos, "vista/FXMLMenuPrincipal.fxml", "Menu principal");
     }
 
-
-
     @FXML
     private void btn_ClicNuevoPedido(ActionEvent event) {
         Navegador.cambiarVentana(tbl_Pedidos, "vista/FXMLPedidosBuscarCliente.fxml", "Nuevo pedido");
     }
 
-
     @FXML
     private void btn_ClicExportarInformacionPedido(ActionEvent event) {
+        Navegador.cambiarVentana(tbl_Pedidos, "vista/FXMLExportarPedido.fxml", "Exportar pedidos");
     }
 
     
