@@ -17,12 +17,12 @@
                </font>
             </Label>
             <Label layoutX="19.0" layoutY="94.0" text="Nombre:" />
-            <TextField fx:id="tfNombre" layoutX="89.0" layoutY="90.0" promptText="nombre" />
+            <TextField fx:id="tf_Nombre" layoutX="89.0" layoutY="90.0" promptText="nombre" />
             <Label layoutX="21.0" layoutY="138.0" text="Descripción: " />
-            <TextArea fx:id="taDescripcion" layoutX="19.0" layoutY="167.0" prefHeight="58.0" prefWidth="257.0" promptText="Breve descripción del producto" />
+            <TextArea fx:id="ta_Descripcion" layoutX="19.0" layoutY="167.0" prefHeight="58.0" prefWidth="257.0" promptText="Breve descripción del producto" />
             <Label layoutX="21.0" layoutY="244.0" text="Restricciones:" />
-            <TextArea fx:id="taRestricciones" layoutX="19.0" layoutY="273.0" prefHeight="58.0" prefWidth="257.0" promptText="Restricciones del producto" />
-            <Button layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnClicCancelarRegistro" text="Cancelar registro" />
+            <TextArea fx:id="ta_Restricciones" layoutX="19.0" layoutY="273.0" prefHeight="58.0" prefWidth="257.0" promptText="Restricciones del producto" />
+            <Button fx:id="btnCancelarRegistro" layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnClicCancelarRegistro" text="Cancelar registro" />
             <Label fx:id="lbCamposInvalidos" layoutX="100.0" layoutY="62.0" prefHeight="21.0" prefWidth="175.0" textFill="RED" />
             <Label fx:id="lbNombreInvalido" layoutX="9.0" layoutY="88.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
                <font>
@@ -44,12 +44,12 @@
       <AnchorPane layoutX="300.0" layoutY="-1.0" prefHeight="400.0" prefWidth="301.0">
          <children>
             <Label layoutX="27.0" layoutY="93.0" text="Precio:" />
-            <TextField fx:id="tfPrecio" layoutX="82.0" layoutY="88.0" prefHeight="31.0" prefWidth="149.0" promptText="\$$$" />
+            <TextField fx:id="tf_Precio" layoutX="82.0" layoutY="88.0" prefHeight="31.0" prefWidth="149.0" promptText="\$$$" />
             <Label layoutX="27.0" layoutY="179.0" text="Cantidad:" />
-            <TextField fx:id="tfCantidad" layoutX="99.0" layoutY="174.0" prefHeight="31.0" prefWidth="134.0" promptText="#" />
+            <TextField fx:id="tf_Cantidad" layoutX="99.0" layoutY="174.0" prefHeight="31.0" prefWidth="134.0" promptText="#" />
             <Label layoutX="27.0" layoutY="236.0" text="Foto del producto:" />
-            <Button layoutX="35.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnClicSubirArchivo" text="Subir archivo" />
-            <Button layoutX="133.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnClicRegistrarProducto" text="Registrar producto" />
+            <Button fx:id="btnSubirArchivo" layoutX="35.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnClicSubirArchivo" text="Subir archivo" />
+            <Button fx:id="btnRegistrarProducto" layoutX="133.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnClicRegistrarProducto" text="Registrar producto" />
             <Label fx:id="lbPrecioInvalido" layoutX="12.0" layoutY="89.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
                <font>
                   <Font size="25.0" />

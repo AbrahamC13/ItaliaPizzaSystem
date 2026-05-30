@@ -7,6 +7,7 @@ package italiapizzasystem.persistencia.pojo;
 public class Producto {
 
     private int idProducto;
+    private int cantidad;
     private String codigoProducto;
     private String descripcion;
     private String nombre;
@@ -20,7 +21,7 @@ public class Producto {
 
     public Producto(int idProducto, String codigoProducto,
             String descripcion, String nombre, String restricciones,
-            double precio) {
+            double precio, int cantidad) {
 
         this.idProducto = idProducto;
         this.codigoProducto = codigoProducto;
@@ -28,6 +29,7 @@ public class Producto {
         this.nombre = nombre;
         this.restricciones = restricciones;
         this.precio = precio;
+        this.cantidad = cantidad;
     }
 
     public int getIdProducto() {
@@ -84,5 +86,13 @@ public class Producto {
 
     public void setFoto(byte[] foto) {
         this.foto = foto;
+    }
+    
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }
