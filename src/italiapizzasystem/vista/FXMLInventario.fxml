@@ -2,55 +2,71 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLInventarioController">
-   <children>
-      <HBox layoutX="149.0" prefHeight="21.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLInventarioController">
+   <top>
+      <VBox prefHeight="111.0" prefWidth="100.0" style="-fx-background-color: #004D57;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Inventario" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Inventario" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="40.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-      </HBox>
-      <Label layoutX="246.0" layoutY="21.0" text="Productos">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <HBox layoutY="77.0" prefHeight="47.0" prefWidth="600.0" spacing="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Region prefHeight="100.0" prefWidth="75.0" />
-            <Label prefHeight="21.0" prefWidth="83.0" text="Búsqueda:" />
-            <TextField fx:id="tfNombre" prefHeight="31.0" prefWidth="209.0" promptText="Pizza Regular" />
-            <Button fx:id="btnClicBuscar" mnemonicParsing="false" prefHeight="31.0" prefWidth="71.0" text="Buscar" />
-            <Region prefHeight="100.0" prefWidth="45.0" />
-         </children>
-         <padding>
-            <Insets left="15.0" right="15.0" />
-         </padding>
-      </HBox>
-      <VBox layoutX="80.0" layoutY="126.0" prefHeight="200.0" prefWidth="418.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
-         <children>
-            <TableView fx:id="tvProductos" prefHeight="200.0" prefWidth="200.0">
+            <Label text="Productos">
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+               <children>
+                  <Label text="Busqueda" />
+                  <TextField fx:id="tf_Nombre" style="-fx-background-radius: 20;" />
+                  <Button fx:id="btn_Buscar" mnemonicParsing="false" onAction="#btnClicBuscar" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Buscar" textFill="WHITE" />
+               </children>
+            </HBox>
+            <TableView fx:id="tv_Productos" prefHeight="344.0" prefWidth="1080.0">
               <columns>
-                <TableColumn fx:id="tcCodigoProducto" prefWidth="180.0" text="Código del producto" />
-                <TableColumn fx:id="tcNombreProducto" prefWidth="259.0" text="Nombre" />
+                <TableColumn fx:id="tc_CodigoProducto" prefWidth="238.0" text="Código del producto" />
+                <TableColumn fx:id="tc_NombreProducto" minWidth="0.0" prefWidth="841.0" text="Nombre" />
               </columns>
             </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="620.0">
+               <children>
+                  <Button fx:id="btn_Regresar" mnemonicParsing="false" onAction="#btnClicRegresar" prefHeight="31.0" prefWidth="130.0" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Regresar" textFill="WHITE" />
+                  <HBox prefHeight="100.0" prefWidth="340.0" spacing="50.0">
+                     <children>
+                        <Button fx:id="btn_RegistrarProducto" mnemonicParsing="false" onAction="#btnClicRegistrarProducto" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Registrar Producto" textFill="WHITE" />
+                        <Button fx:id="btn_GenerarReporte" mnemonicParsing="false" onAction="#btnClicGenerarReporte" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Generar Reporte" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </HBox>
          </children>
          <opaqueInsets>
-            <Insets left="10.0" right="10.0" />
+            <Insets />
          </opaqueInsets>
+         <padding>
+            <Insets left="100.0" right="100.0" top="40.0" />
+         </padding>
       </VBox>
-      <HBox alignment="CENTER" layoutX="111.0" layoutY="334.0" prefHeight="63.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#btnClicRegresar" prefHeight="31.0" prefWidth="94.0" text="Regresar" />
-            <Region prefHeight="88.0" prefWidth="226.0" />
-            <Button mnemonicParsing="false" onAction="#btnClicGenerarReporte" text="Generar reporte" />
-         </children>
-      </HBox>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>

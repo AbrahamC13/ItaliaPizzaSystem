@@ -44,7 +44,7 @@ public class EmpleadoDAO {
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             sentencia.setInt(1, idEmpleado);
             ResultSet resultado = sentencia.executeQuery();
-            if(resultado != null){
+            if(resultado.next()){
                 empleado = serializarEmpleado(resultado);
             }
             sentencia.close();
@@ -86,9 +86,9 @@ public class EmpleadoDAO {
             ResultSet resultado = sentencia.executeQuery();
             if(resultado.next()){
                 empleado = serializarEmpleado(resultado);
-            }else{
-                throw new ValidarCredencialesException("Error al validar credenciales");
-            }
+            }//else{
+               // throw new ValidarCredencialesException("Error al validar credenciales");
+            //}
             conexionBD.close();
             sentencia.close();
             resultado.close();
