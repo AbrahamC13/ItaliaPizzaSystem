@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package italiapizzasystem.utilidad;
-/*
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -18,20 +18,19 @@ import com.itextpdf.text.pdf.PdfWriter;
 import italiapizzasystem.excepciones.ExportarDocumentoException;
 import italiapizzasystem.persistencia.dao.PedidoDAO;
 import italiapizzasystem.persistencia.pojo.PedidoCliente;
-import java.awt.Font;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.Document;*/
 
 /**
  *
  * @author acrca
  */
-/*
+
 public class EscritorPDF {
     
     private static final Logger LOGGER = Logger.getLogger(EscritorPDF.class.getName());
@@ -40,7 +39,6 @@ public class EscritorPDF {
     private static final Font FUENTE_ENCABEZADO = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, BaseColor.WHITE);
     private static final Font FUENTE_CELDA = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
     
-    // Color de fondo para los encabezados de la tabla (#004D57)
     private static final BaseColor COLOR_PANEL = new BaseColor(0, 77, 87);
 
     public static void exportarPedidos(List<PedidoCliente> listaPedidos, File archivoDestino) 
@@ -60,7 +58,6 @@ public class EscritorPDF {
             LOGGER.log(Level.SEVERE, "Error de estructura iText o de E/S al crear el PDF: " + archivoDestino.getAbsolutePath(), ex);
             throw new ExportarDocumentoException("No se pudo generar o escribir en el archivo PDF de destino.", ex);
         } catch (ExportarDocumentoException ex) {
-            // Relanzamos la excepción específica de base de datos capturada en las filas individuales
             throw ex;
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "Error general e inesperado durante la exportación a PDF", ex);
@@ -90,12 +87,9 @@ public class EscritorPDF {
         documento.add(subtitulo);
     }
 
-    private static void añadirTablaPedidos(Document documento, List<PedidoCliente> listaPedidos) 
-            throws DocumentException, ExportarDocumentoException {
-        // Inicializada exactamente a 6 columnas
+    private static void añadirTablaPedidos(Document documento, List<PedidoCliente> listaPedidos) throws DocumentException, ExportarDocumentoException {
         PdfPTable tabla = new PdfPTable(6);
         tabla.setWidthPercentage(100);
-        // Distribución balanceada de los anchos relativos de las columnas en el formato horizontal de la página
         tabla.setWidths(new float[]{1.0f, 2.5f, 3.5f, 2.0f, 1.5f, 1.5f});
         
         configurarEncabezadosTabla(tabla);
@@ -128,7 +122,6 @@ public class EscritorPDF {
         double totalPedido = 0.0;
         
         try {
-            // Obtenemos el total de forma aislada llamando al método dedicado del DAO
             totalPedido = PedidoDAO.obtenerTotalPedidoPorId(pedido.getIdPedido());
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, "Error al consultar el total del pedido " + pedido.getIdPedido() + " para el PDF.", ex);
@@ -139,7 +132,7 @@ public class EscritorPDF {
         tabla.addCell(crearCeldaIzquierda(pedido.getNombreCliente()));
         tabla.addCell(crearCeldaIzquierda(pedido.getDireccion()));
         tabla.addCell(crearCeldaCentrada(pedido.getFechaPedido()));
-        tabla.addCell(crearCeldaCentrada("$" + String.format("%.2f", totalPedido))); // Columna del total monetario
+        tabla.addCell(crearCeldaCentrada("$" + String.format("%.2f", totalPedido))); 
         tabla.addCell(crearCeldaCentrada(pedido.getStatus()));
     }
 
@@ -160,4 +153,4 @@ public class EscritorPDF {
         celda.setPadding(6);
         return celda;
     }
-}*/
+}
