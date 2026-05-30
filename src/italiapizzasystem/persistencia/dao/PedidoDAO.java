@@ -238,4 +238,28 @@ public class PedidoDAO {
         return pedido;
     }
     
+    public static double obtenerTotalPedidoPorId(int idPedido) throws SQLException {
+        double total = 0.0;
+        Connection conexionBD = ConexionBD.abrirConexion();
+        
+        if (conexionBD != null) {
+            String consulta = "SELECT IFNULL(SUM(total), 0.0) AS totalGeneral FROM descripcionPedido WHERE Pedido_idPedido = ?";
+            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
+            sentencia.setInt(1, idPedido);
+            
+            ResultSet resultado = sentencia.executeQuery();
+            if (resultado.next()) {
+                total = resultado.getDouble("totalGeneral");
+            }
+            
+            resultado.close();
+            sentencia.close();
+            conexionBD.close();
+        } else {
+            throw new SQLException("Error al conectar a la BD.");
+        }
+        
+        return total;
+    }
+    
 }

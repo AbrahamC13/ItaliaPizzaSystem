@@ -11,6 +11,7 @@ public class PedidoCliente {
     private String direccion;
     private String fechaPedido;
     private String status;
+    private double total;
 
     public PedidoCliente() {
 

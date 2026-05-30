@@ -18,12 +18,12 @@
          <children>
             <TableView fx:id="tbl_Pedidos" layoutX="47.0" layoutY="165.0" prefHeight="375.0" prefWidth="1203.0" style="-fx-background-radius: 10px;">
               <columns>
-                <TableColumn fx:id="col_IdPedido" text="ID Pedido" />
+                <TableColumn fx:id="col_IdPedido" text="ID Pedido" prefWidth="85.0"/>
                 <TableColumn fx:id="col_NombreCliente" prefWidth="309.0" text="Nombre cliente" />
                   <TableColumn fx:id="col_Direccion" prefWidth="303.0" text="Dirección" />
                   <TableColumn fx:id="col_Fecha" prefWidth="193.0" text="Fecha" />
                   <TableColumn fx:id="col_Status" prefWidth="175.0" text="Estatus " />
-                  <TableColumn fx:id="col_Editar" prefWidth="142.0" />
+                  <TableColumn fx:id="col_Editar" prefWidth="136.0" />
               </columns>
             </TableView>
             <Label layoutX="62.0" layoutY="116.0" text="Buscar por cliente:">

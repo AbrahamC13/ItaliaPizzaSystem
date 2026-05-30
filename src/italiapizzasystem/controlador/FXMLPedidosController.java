@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -158,7 +159,30 @@ public class FXMLPedidosController implements Initializable {
 
     @FXML
     private void btn_ClicExportarInformacionPedido(ActionEvent event) {
-        Navegador.cambiarVentana(tbl_Pedidos, "vista/FXMLExportarPedido.fxml", "Exportar pedidos");
+        try {
+            Stage escenarioBase = (Stage) tbl_Pedidos.getScene().getWindow();
+            FXMLLoader cargador = new FXMLLoader(ItaliaPizzaSystem.class.getResource("vista/FXMLExportarPedido.fxml"));
+            Parent vista = cargador.load();
+            
+            Stage escenarioModal = new Stage();
+            escenarioModal.setScene(new Scene(vista));
+            escenarioModal.setTitle("Exportar pedidos");
+            
+            escenarioModal.initModality(Modality.WINDOW_MODAL);
+            escenarioModal.initOwner(escenarioBase);
+            escenarioModal.centerOnScreen();
+            
+            escenarioModal.showAndWait();
+            
+        } catch (IOException ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "No se pudo abrir la vista de exportar pedido.");
+            LOGGER.log(Level.SEVERE, "Error al cargar FXMLExportarPedido ", ex);
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            Utilidad.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error general", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Error general capturado en btn_ClicExportarInformacionPedido ", ex);
+            ex.printStackTrace();
+        }
     }
 
     

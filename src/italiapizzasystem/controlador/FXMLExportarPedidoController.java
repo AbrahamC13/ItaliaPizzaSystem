@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -45,6 +46,7 @@ public class FXMLExportarPedidoController implements Initializable {
     
     @FXML
     private void btn_ClicCancelar(ActionEvent event) {
-        Navegador.cambiarVentana(btn_Cancelar, "vista/FXMLPedidos.fxml", "Pedidos");
+        Stage escenarioModal = (Stage) btn_Cancelar.getScene().getWindow();
+        escenarioModal.close();
     }
 }
