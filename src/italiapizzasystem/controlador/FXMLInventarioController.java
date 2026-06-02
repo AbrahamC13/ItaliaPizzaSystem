@@ -69,6 +69,9 @@ public class FXMLInventarioController
     @FXML
     private TableColumn<Producto, String>
             tc_NombreProducto;
+    
+    @FXML
+    private Button btn_ActualizarProducto;
 
     @Override
     public void initialize(
@@ -260,4 +263,57 @@ public class FXMLInventarioController
         );
        }
     }
+    
+    @FXML
+    private void btnClicActualizarProducto(
+        ActionEvent event
+    ) {
+
+    try {
+
+        Stage escenarioBase =
+                (Stage) btn_ActualizarProducto
+                .getScene()
+                .getWindow();
+
+        FXMLLoader cargador =
+                new FXMLLoader(
+                        ItaliaPizzaSystem.class.getResource(
+                                "vista/FXMLActualizarProducto.fxml"
+                        )
+                );
+
+        Parent vista =
+                cargador.load();
+
+        Scene escena =
+                new Scene(vista);
+
+        escenarioBase.setScene(
+                escena
+        );
+
+        escenarioBase.setTitle(
+                "Actualizar Producto"
+        );
+
+        escenarioBase.show();
+
+    } catch (IOException ex) {
+
+        Utilidad.mostrarAlertaSimple(
+                Alert.AlertType.ERROR,
+                "Error",
+                ex.getMessage()
+        );
+
+        LOGGER.log(
+                Level.SEVERE,
+                "Error al abrir FXMLActualizarProducto",
+                ex
+        );
+        }
+    }
 }
+
+    
