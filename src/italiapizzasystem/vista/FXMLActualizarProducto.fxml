@@ -1,67 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLActualizarProductoController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #FAF8F1;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="italiapizzasystem.controlador.FXMLActualizarProductoController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="309.0">
-         <children>
-            <Label layoutX="56.0" layoutY="28.0" text="Datos del producto">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Label>
-            <Label layoutX="19.0" layoutY="94.0" text="Nombre:" />
-            <TextField fx:id="tf_Nombre" layoutX="89.0" layoutY="90.0" promptText="nombre" />
-            <Label layoutX="21.0" layoutY="138.0" text="Descripción: " />
-            <TextArea fx:id="ta_Descripcion" layoutX="19.0" layoutY="167.0" prefHeight="58.0" prefWidth="257.0" promptText="Breve descripción del producto" />
-            <Label layoutX="21.0" layoutY="244.0" text="Restricciones:" />
-            <TextArea fx:id="ta_Restricciones" layoutX="19.0" layoutY="273.0" prefHeight="58.0" prefWidth="257.0" promptText="Restricciones del producto" />
-            <Button fx:id="btn_Cancelar" layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#btn_ClicCancelar" text="Cancelar " />
-            <Label fx:id="lbCamposInvalidos" layoutX="100.0" layoutY="62.0" prefHeight="21.0" prefWidth="175.0" textFill="RED" />
-            <Label fx:id="lbNombreInvalido" layoutX="9.0" layoutY="88.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbDescripcionInvalido" layoutX="9.0" layoutY="131.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbRestriccionInvalida" layoutX="9.0" layoutY="237.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="300.0" layoutY="-1.0" prefHeight="400.0" prefWidth="301.0">
-         <children>
-            <Label layoutX="27.0" layoutY="93.0" text="Precio:" />
-            <TextField fx:id="tf_Precio" layoutX="82.0" layoutY="88.0" prefHeight="31.0" prefWidth="149.0" promptText="\$$$" />
-            <Label layoutX="27.0" layoutY="179.0" text="Cantidad:" />
-            <TextField fx:id="tf_Cantidad" layoutX="99.0" layoutY="174.0" prefHeight="31.0" prefWidth="134.0" promptText="#" />
-            <Label layoutX="27.0" layoutY="236.0" text="Foto del producto:" />
-            <Button fx:id="btn_SubirArchivo" layoutX="35.0" layoutY="271.0" mnemonicParsing="false" onAction="#btn_ClicSubirArchivo" text="Subir archivo" />
-            <Button fx:id="btn_ActualizarDatos" layoutX="168.0" layoutY="349.0" mnemonicParsing="false" onAction="#btn_ClicActualizarDatos" text="Actualizar datos" />
-            <Label fx:id="lbPrecioInvalido" layoutX="12.0" layoutY="89.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbCantidadInvalida" layoutX="12.0" layoutY="172.0" prefHeight="36.0" prefWidth="11.0" textFill="RED">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Button fx:id="btn_EliminarProducto" layoutX="13.0" layoutY="349.0" mnemonicParsing="false" onAction="#btn_ClicEliminarProducto" text="Eliminar producto" />
-         </children>
-      </AnchorPane>
+      <BorderPane prefHeight="720.0" prefWidth="946.0">
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="770.0" spacing="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btn_CancelarRegistro" mnemonicParsing="false" onAction="#btn_ClicCancelar" prefHeight="40.0" prefWidth="164.0" style="-fx-background-radius: 10; -fx-background-color: #00A1B2;" text="Cancelar " textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Button>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="465.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btn_EliminarProducto" mnemonicParsing="false" onAction="#btn_ClicEliminarProducto" prefHeight="40.0" prefWidth="190.0" style="-fx-background-radius: 10; -fx-background-color: #00A1B2;" text="Eliminar producto" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_ActualizarProducto" mnemonicParsing="false" onAction="#btn_ClicActualizarDatos" prefHeight="40.0" prefWidth="173.0" style="-fx-background-radius: 10; -fx-background-color: #00A1B2;" text="Actualizar datos" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="35.0" right="35.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+         <center>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="130.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="430.0" prefWidth="326.0" spacing="20.0">
+                     <children>
+                        <Label text="Datos del sistema">
+                           <font>
+                              <Font name="Arial" size="22.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="41.0" prefWidth="268.0" spacing="25.0">
+                           <children>
+                              <Label fx:id="lb_Nombre" text="Nombre:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tf_Nombre" prefHeight="30.0" prefWidth="218.0" promptText="Nombre" style="-fx-background-radius: 20;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Label fx:id="lb_Descripcion" text="Descripción:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="ta_Descripcion" prefHeight="115.0" prefWidth="268.0" promptText="Breve descripción del producto" style="-fx-background-radius: 20;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                        <Label fx:id="lb_Restriccion" text="Restricciones:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="ta_Restricciones" prefHeight="115.0" prefWidth="268.0" promptText="Restricciones del producto" style="-fx-background-radius: 20;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="430.0" prefWidth="346.0" spacing="20.0">
+                     <children>
+                        <HBox prefHeight="42.0" prefWidth="276.0" spacing="50.0">
+                           <children>
+                              <Label fx:id="lb_Precio" text="Precio:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tf_Precio" prefHeight="30.0" prefWidth="174.0" promptText="\$$$" style="-fx-background-radius: 20;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="38.0" prefWidth="276.0" spacing="25.0">
+                           <children>
+                              <Label fx:id="lb_Cantidad" text="Cantidad:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tf_Cantidad" prefHeight="30.0" prefWidth="174.0" promptText="#" style="-fx-background-radius: 20;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Label text="Foto del producto">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btn_SubirArchivo" mnemonicParsing="false" onAction="#btn_ClicSubirArchivo" prefHeight="42.0" prefWidth="130.0" style="-fx-background-radius: 10; -fx-background-color: #00A1B2;" text="Subir archivo" textFill="WHITE" />
+                        <ImageView fitHeight="150.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="35.0" top="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </center>
+         <top>
+            <VBox prefHeight="73.0" prefWidth="840.0" style="-fx-background-color: #004D57;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="902.0" spacing="20.0">
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="335.0" text="Actualizar producto" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
+      <Pane prefHeight="720.0" prefWidth="134.0" style="-fx-background-color: #FF7B00;" />
    </children>
-</AnchorPane>
+</HBox>
