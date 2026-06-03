@@ -17,7 +17,7 @@ public class ProductoDAO {
         ArrayList<Producto> productos = new ArrayList<Producto>();
         Connection conexionBD = ConexionBD.abrirConexion();
         if(conexionBD != null){
-            String consulta = "SELECT idProducto, codigoProducto, descripcion, nombre, restricciones, precio, cantidad FROM producto"; 
+            String consulta = "SELECT idProducto, codigoProducto, descripcion, nombre, restricciones, precio, cantidad, foto FROM producto"; 
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
@@ -41,6 +41,7 @@ public class ProductoDAO {
         producto.setRestricciones(resultado.getString("restricciones"));
         producto.setPrecio(resultado.getDouble("precio"));
         producto.setCantidad(resultado.getInt("cantidad"));
+        producto.setFoto(resultado.getBytes("foto"));
         return producto;
     }
     
@@ -56,8 +57,8 @@ public class ProductoDAO {
         String consulta =
                 "INSERT INTO producto "
                 + "(codigoProducto, descripcion, "
-                + "nombre, restricciones, precio, cantidad) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "nombre, restricciones, precio, cantidad, foto) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement sentencia =
                 conexionBD.prepareStatement(
@@ -65,33 +66,38 @@ public class ProductoDAO {
                 );
 
         sentencia.setString(
-                1,
-                producto.getCodigoProducto()
+            1,
+            producto.getCodigoProducto()
         );
 
         sentencia.setString(
-                2,
-                producto.getDescripcion()
+            2,
+            producto.getDescripcion()
         );
 
         sentencia.setString(
-                3,
-                producto.getNombre()
+            3,
+            producto.getNombre()
         );
 
         sentencia.setString(
-                4,
-                producto.getRestricciones()
+            4,
+            producto.getRestricciones()
         );
 
         sentencia.setDouble(
-                5,
-                producto.getPrecio()
+            5,
+            producto.getPrecio()
         );
-        
+
         sentencia.setInt(
-                6,
-                producto.getCantidad()
+            6,
+            producto.getCantidad()
+        ); 
+
+        sentencia.setBytes(
+            7,
+            producto.getFoto()
         );
 
         int filasAfectadas =
@@ -125,7 +131,7 @@ public class ProductoDAO {
         String consulta =
                 "SELECT idProducto, codigoProducto, "
                 + "descripcion, nombre, "
-                + "restricciones, precio, cantidad "
+                + "restricciones, precio, cantidad, foto "
                 + "FROM producto "
                 + "WHERE nombre LIKE ?";
 
@@ -157,5 +163,119 @@ public class ProductoDAO {
     }
 
     return productos;
+    }
+    
+    public static boolean eliminarProducto(
+        int idProducto
+    ) throws SQLException {
+
+    Connection conexionBD =
+            ConexionBD.abrirConexion();
+
+    if (conexionBD != null) {
+
+        String consulta =
+                "DELETE FROM producto "
+                + "WHERE idProducto = ?";
+
+        PreparedStatement sentencia =
+                conexionBD.prepareStatement(
+                        consulta
+                );
+
+        sentencia.setInt(
+                1,
+                idProducto
+        );
+
+        int filasAfectadas =
+                sentencia.executeUpdate();
+
+        sentencia.close();
+        conexionBD.close();
+
+        return filasAfectadas > 0;
+
+    } else {
+
+        throw new SQLException(
+                "Error al conectar a la BD."
+        );
+      }
+    }
+    
+    public static boolean actualizarProducto(
+        Producto producto
+    ) throws SQLException {
+
+    Connection conexionBD =
+            ConexionBD.abrirConexion();
+
+    if (conexionBD != null) {
+
+        String consulta =
+                "UPDATE producto "
+                + "SET nombre = ?, "
+                + "descripcion = ?, "
+                + "restricciones = ?, "
+                + "precio = ?, "
+                + "cantidad = ?, "
+                + "foto = ? "
+                + "WHERE idProducto = ?";
+
+        PreparedStatement sentencia =
+                conexionBD.prepareStatement(
+                        consulta
+                );
+
+        sentencia.setString(
+                1,
+                producto.getNombre()
+        );
+
+        sentencia.setString(
+                2,
+                producto.getDescripcion()
+        );
+
+        sentencia.setString(
+                3,
+                producto.getRestricciones()
+        );
+
+        sentencia.setDouble(
+                4,
+                producto.getPrecio()
+        );
+
+        sentencia.setInt(
+                5,
+                producto.getCantidad()
+        );
+        
+        sentencia.setBytes(
+                6,
+                producto.getFoto()
+        );
+
+        sentencia.setInt(
+                7,
+                producto.getIdProducto()
+        );
+
+        int filasAfectadas =
+                sentencia.executeUpdate();
+
+        sentencia.close();
+        conexionBD.close();
+
+        return filasAfectadas > 0;
+
+    } else {
+
+        throw new SQLException(
+                "Error al conectar a la BD."
+        );
+      }
     }
 }

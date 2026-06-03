@@ -82,7 +82,7 @@ public class FXMLInventarioController
     }
 
     @FXML
-    private void btnClicBuscar(
+    private void btn_ClicBuscar(
             ActionEvent event
     ) {
 
@@ -112,7 +112,7 @@ public class FXMLInventarioController
     }
 
     @FXML
-    private void btnClicRegresar(
+    private void btn_ClicRegresar(
             ActionEvent event
     ) {
 
@@ -163,7 +163,7 @@ public class FXMLInventarioController
     }
 
     @FXML
-    private void btnClicRegistrarProducto(
+    private void btn_ClicRegistrarProducto(
             ActionEvent event
     ) {
 
@@ -215,7 +215,7 @@ public class FXMLInventarioController
     }
 
     @FXML
-    private void btnClicGenerarReporte(
+    private void btn_ClicGenerarReporte(
             ActionEvent event
     ) {
 
@@ -265,9 +265,25 @@ public class FXMLInventarioController
     }
     
     @FXML
-    private void btnClicActualizarProducto(
+    private void btn_ClicActualizarProducto(
         ActionEvent event
     ) {
+
+    Producto productoSeleccionado =
+            tv_Productos
+            .getSelectionModel()
+            .getSelectedItem();
+
+    if (productoSeleccionado == null) {
+
+        Utilidad.mostrarAlertaSimple(
+                Alert.AlertType.WARNING,
+                "Seleccione un producto",
+                "Debe seleccionar un producto para actualizar."
+        );
+
+        return;
+    }
 
     try {
 
@@ -286,6 +302,13 @@ public class FXMLInventarioController
         Parent vista =
                 cargador.load();
 
+        FXMLActualizarProductoController controlador =
+                cargador.getController();
+
+        controlador.inicializarDatos(
+                productoSeleccionado
+        );
+
         Scene escena =
                 new Scene(vista);
 
@@ -301,18 +324,8 @@ public class FXMLInventarioController
 
     } catch (IOException ex) {
 
-        Utilidad.mostrarAlertaSimple(
-                Alert.AlertType.ERROR,
-                "Error",
-                ex.getMessage()
-        );
-
-        LOGGER.log(
-                Level.SEVERE,
-                "Error al abrir FXMLActualizarProducto",
-                ex
-        );
-        }
+        ex.printStackTrace();
+       }
     }
 }
 

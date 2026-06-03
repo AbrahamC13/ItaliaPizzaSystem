@@ -12,7 +12,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1276.0">
                <children>
-                  <Button fx:id="btn_Regresar" mnemonicParsing="false" onAction="#btnClicRegresar" prefHeight="51.0" prefWidth="50.0" style="-fx-background-radius: 45; -fx-background-image: url('/italiapizzasystemRecursos/imagenes/regreso.png'); -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-size: cover;">
+                  <Button fx:id="btn_Regresar" mnemonicParsing="false" onAction="#btn_ClicRegresar" prefHeight="51.0" prefWidth="50.0" style="-fx-background-radius: 45; -fx-background-image: url('/italiapizzasystemRecursos/imagenes/regreso.png'); -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-size: cover;">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -45,7 +45,7 @@
                <children>
                   <Label text="Busqueda" />
                   <TextField fx:id="tf_Nombre" style="-fx-background-radius: 20;" />
-                  <Button fx:id="btn_Buscar" mnemonicParsing="false" onAction="#btnClicBuscar" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Buscar" textFill="WHITE" />
+                  <Button fx:id="btn_Buscar" mnemonicParsing="false" onAction="#btn_ClicBuscar" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Buscar" textFill="WHITE" />
                </children>
             </HBox>
             <TableView fx:id="tv_Productos" prefHeight="344.0" prefWidth="1080.0">
@@ -58,13 +58,13 @@
                <children>
                   <HBox prefHeight="85.0" prefWidth="1086.0" spacing="50.0">
                      <children>
-                        <Button fx:id="btn_ActualizarProducto" mnemonicParsing="false" onAction="#btnClicActualizarProducto" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Actualizar Producto" textFill="WHITE">
+                        <Button fx:id="btn_ActualizarProducto" mnemonicParsing="false" onAction="#btn_ClicActualizarProducto" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Actualizar Producto" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="555.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btn_RegistrarProducto" mnemonicParsing="false" onAction="#btnClicRegistrarProducto" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Registrar Producto" textFill="WHITE" />
-                        <Button fx:id="btn_GenerarReporte" mnemonicParsing="false" onAction="#btnClicGenerarReporte" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Generar Reporte" textFill="WHITE" />
+                        <Button fx:id="btn_RegistrarProducto" mnemonicParsing="false" onAction="#btn_ClicRegistrarProducto" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Registrar Producto" textFill="WHITE" />
+                        <Button fx:id="btn_GenerarReporte" mnemonicParsing="false" onAction="#btn_ClicGenerarReporte" style="-fx-background-color: #00A1B2; -fx-background-radius: 10;" text="Generar Reporte" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

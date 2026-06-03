@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.nio.file.Files;
 
 import javafx.event.ActionEvent;
 
@@ -59,7 +60,9 @@ public class FXMLRegistrarProductoController implements Initializable {
     @FXML
     private Label lb_Cantidad;
     @FXML
-    private Button btnCancelarRegistro;
+    private Button btn_CancelarRegistro;
+    
+    private File archivoImagen;
 
     /**
      * Initializes the controller class.
@@ -70,11 +73,11 @@ public class FXMLRegistrarProductoController implements Initializable {
     }    
 
     @FXML
-    private void btnClicCancelarRegistro(ActionEvent event) {
+    private void btn_ClicCancelarRegistro(ActionEvent event) {
         try {
 
         Stage escenarioBase =
-                (Stage) btnCancelarRegistro
+                (Stage) btn_CancelarRegistro
                 .getScene()
                 .getWindow();
 
@@ -104,24 +107,34 @@ public class FXMLRegistrarProductoController implements Initializable {
     }
 
     @FXML
-    private void btnClicSubirArchivo(ActionEvent event) {
-        System.out.println("Entró a subir archivo");
+    private void btn_ClicSubirArchivo(
+        ActionEvent event
+    ) {
 
-        FileChooser selector = new FileChooser();
+    FileChooser selector =
+            new FileChooser();
 
-        File archivo =
-            selector.showOpenDialog(null);
-
-        if (archivo != null) {
-
-            System.out.println(
-                archivo.getAbsolutePath()
+    File archivo =
+            selector.showOpenDialog(
+                    tf_Nombre
+                    .getScene()
+                    .getWindow()
             );
-        }
+
+    if (archivo != null) {
+
+        archivoImagen = archivo;
+
+        Utilidad.mostrarAlertaSimple(
+                Alert.AlertType.INFORMATION,
+                "Imagen seleccionada",
+                archivo.getName()
+        );
+      }
     }
 
     @FXML
-    private void btnClicRegistrarProducto(ActionEvent event) {
+    private void btn_ClicRegistrarProducto(ActionEvent event) {
 
     try {
 
@@ -166,6 +179,16 @@ public class FXMLRegistrarProductoController implements Initializable {
                         tf_Cantidad.getText()
                 )
         );
+        
+        if (archivoImagen != null) {
+
+        producto.setFoto(
+            Files.readAllBytes(
+                    archivoImagen.toPath()
+            )
+          );
+        }
+        
 
         boolean registrado =
                 ProductoDAO.registrarProducto(

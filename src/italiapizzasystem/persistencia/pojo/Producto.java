@@ -14,11 +14,11 @@ public class Producto {
     private String restricciones;
     private double precio;
     private byte[] foto;
-
+    
     public Producto() {
 
     }
-
+    
     public Producto(int idProducto, String codigoProducto,
             String descripcion, String nombre, String restricciones,
             double precio, int cantidad) {
