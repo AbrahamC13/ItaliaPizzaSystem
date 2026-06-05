@@ -3,6 +3,10 @@ package italiapizzasystem.controlador;
 import italiapizzasystem.ItaliaPizzaSystem;
 import italiapizzasystem.persistencia.pojo.Producto;
 import italiapizzasystem.utilidad.Utilidad;
+import italiapizzasystem.utilidad.EscritorPDF;
+
+import java.io.File;
+import java.util.ArrayList;
 
 import italiapizzasystem.persistencia.dao.ProductoDAO;
 import javafx.collections.FXCollections;
@@ -30,6 +34,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -219,11 +224,53 @@ public class FXMLInventarioController
             ActionEvent event
     ) {
 
-        Utilidad.mostrarAlertaSimple(
-                Alert.AlertType.INFORMATION,
-                "Reporte",
-                "Función en desarrollo"
+    try {
+
+        ArrayList<Producto> productos =
+                ProductoDAO.obtenerProductos();
+
+        FileChooser selector =
+                new FileChooser();
+
+        selector.setTitle(
+                "Guardar Reporte de Inventario"
         );
+
+        selector.setInitialFileName(
+                "Inventario.pdf"
+        );
+
+        File archivo =
+                selector.showSaveDialog(
+                        btn_GenerarReporte
+                        .getScene()
+                        .getWindow()
+                );
+
+        if (archivo != null) {
+
+            EscritorPDF.exportarInventario(
+                    productos,
+                    archivo
+            );
+
+            Utilidad.mostrarAlertaSimple(
+                    Alert.AlertType.INFORMATION,
+                    "Reporte generado",
+                    "El PDF se generó correctamente."
+            );
+        }
+
+    } catch (Exception ex) {
+
+        ex.printStackTrace();
+
+        Utilidad.mostrarAlertaSimple(
+                Alert.AlertType.ERROR,
+                "Error",
+                ex.getMessage()
+        );
+      }
     }
     
     //Metodo

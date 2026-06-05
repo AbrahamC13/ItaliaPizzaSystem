@@ -133,7 +133,8 @@ public class ProductoDAO {
                 + "descripcion, nombre, "
                 + "restricciones, precio, cantidad, foto "
                 + "FROM producto "
-                + "WHERE nombre LIKE ?";
+                + "WHERE nombre LIKE ?"
+                + "OR codigoProducto LIKE ?";
 
         PreparedStatement sentencia =
                 conexionBD.prepareStatement(
@@ -142,6 +143,11 @@ public class ProductoDAO {
 
         sentencia.setString(
                 1,
+                "%" + nombre + "%"
+        );
+        
+        sentencia.setString(
+                2,
                 "%" + nombre + "%"
         );
 
