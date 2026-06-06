@@ -10,8 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  *
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PedidoDAOTest {
   private Connection conexion;
 
-    // === CONFIGURACIÓN Y AISLAMIENTO DE LA BASE DE DATOS ===
+    // Configuración y aislamiento de la bd
     public void setUp() throws SQLException {
         conexion = ConexionBD.abrirConexion();
         if (conexion == null) {
@@ -53,7 +52,7 @@ public class PedidoDAOTest {
         }
     }
 
-    // === MÉTODOS DE ASISTENCIA (ASSERTIONS) ===
+    // Métodos de asistencia para las pruebas
     private void assertNotNull(Object obj, String mensaje) {
         if (obj == null) throw new AssertionError(mensaje);
     }
@@ -80,7 +79,7 @@ public class PedidoDAOTest {
         throw new AssertionError(mensaje);
     }
 
-    // === INSERCIONES AUXILIARES SOLUCIONANDO FOREIGN KEYS ===
+    // Inserciones auxiliares solucionando las restricciones de las foreign keys para efectos de las pruebas
     
     private void insertarEmpleadoPruebaReal(int idEmpleado, String nombre, String usuario) throws SQLException {
         String sql = "INSERT INTO empleado (idEmpleado, nombre, aPaterno, aMaterno, ciudad, codigoPostal, direccion, email, telefono, usuario, contrasenia, status, rol) "
@@ -162,7 +161,7 @@ public class PedidoDAOTest {
         }
     }
 
-    // === PRUEBAS UNITARIAS ===
+    // Pruebas unitarias
 
     public void testObtenerPedidos_ConDatos() {
         System.out.println("Prueba 1: obtenerPedidos - Recuperar pedidos registrados");
@@ -318,7 +317,7 @@ public class PedidoDAOTest {
         }
     }
 
-    // === EJECUTOR PRINCIPAL MANUAL (MAIN) ===
+    // Ejecutamos las pruebas en el main
     public static void main(String[] args) {
         System.out.println("=== INICIANDO PRUEBAS MANUALES DE PEDIDODAO ===");
         int pruebasPasadas = 0;
