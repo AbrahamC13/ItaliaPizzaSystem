@@ -20,6 +20,16 @@ public class OrdenFila {
     
     private Producto productoBase;
 
+    public OrdenFila(int idProducto, String nombreProducto, int cantidad, double precioUnitario, double subtotal, Button btnQuitar, Producto productoBase) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.subtotal = subtotal;
+        this.btnQuitar = btnQuitar;
+        this.productoBase = productoBase;
+    }
+
     public OrdenFila(Producto producto) {
         this.productoBase = producto;
         this.idProducto = producto.getIdProducto();

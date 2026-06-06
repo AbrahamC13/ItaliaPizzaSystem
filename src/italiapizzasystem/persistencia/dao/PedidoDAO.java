@@ -22,7 +22,7 @@ public class PedidoDAO {
         ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
         Connection conexionBD = ConexionBD.abrirConexion();
         if( conexionBD != null){
-            String consulta = "SELECT idPedido, fechaPedido, estatus, idCliente, idEmpleado FROM pedido";
+            String consulta = "SELECT idPedido, fechaPedido, estatus, Cliente_idCliente, Empleado_idEmpleado FROM pedido";
             PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
@@ -222,8 +222,8 @@ public class PedidoDAO {
         Pedido pedido = new Pedido();
         pedido.setIdPedido(resultado.getInt("idPedido"));
         pedido.setStatus(resultado.getString("estatus"));
-        pedido.setIdEmpleado(resultado.getInt("idEmpleado"));
-        pedido.setIdCliente(resultado.getInt("idCliente"));
+        pedido.setIdEmpleado(resultado.getInt("Empleado_idEmpleado"));
+        pedido.setIdCliente(resultado.getInt("Cliente_idCliente"));
         pedido.setFechaPedido(resultado.getString("fechaPedido"));
         return pedido;
     }
