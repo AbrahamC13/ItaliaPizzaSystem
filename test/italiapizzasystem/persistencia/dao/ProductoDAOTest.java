@@ -6,8 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -16,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductoDAOTest {
     private Connection conexion;
 
-    // === CONFIGURACIÓN Y AISLAMIENTO DE LA BASE DE DATOS ===
+    //Configuramos y aislamos la bd para efectos de pruebas
     public void setUp() throws SQLException {
         conexion = ConexionBD.abrirConexion();
         if (conexion == null) {
@@ -42,7 +40,7 @@ public class ProductoDAOTest {
         }
     }
 
-    // === MÉTODOS DE ASISTENCIA (ASSERTIONS) ===
+    // Métodos de asistencia
     private void assertNotNull(Object obj, String mensaje) {
         if (obj == null) throw new AssertionError(mensaje);
     }
@@ -69,7 +67,7 @@ public class ProductoDAOTest {
         throw new AssertionError(mensaje);
     }
 
-    // === INSERCIÓN AUXILIAR DIRECTA EN BD ===
+    // Inserción auxiliar directa a la bd
     private void insertarProductoDirecto(String codigo, String desc, String nombre, String restr, double precio, int cant) throws SQLException {
         String sql = "INSERT INTO producto (codigoProducto, descripcion, nombre, restricciones, precio, cantidad, foto) VALUES (?, ?, ?, ?, ?, ?, NULL)";
         try (Connection conn = ConexionBD.abrirConexion();
@@ -84,7 +82,7 @@ public class ProductoDAOTest {
         }
     }
 
-    // === PRUEBAS UNITARIAS ===
+    // Pruebas unitarias
 
     public void testObtenerProductos_ConDatos() {
         System.out.println("Prueba 1: obtenerProductos - Recuperar todos los productos");
@@ -117,7 +115,7 @@ public class ProductoDAOTest {
             boolean exito = ProductoDAO.registrarProducto(nuevo);
             assertTrue(exito, "El método registrarProducto debería retornar verdadero.");
 
-            // Validar verificación en la base de datos
+            // Validamos verificación en la base de datos
             ArrayList<Producto> bdProductos = ProductoDAO.obtenerProductos();
             assertEquals(1, bdProductos.size(), "El producto no se guardó en la base de datos.");
             assertEquals("Papas Fritas", bdProductos.get(0).getNombre(), "El nombre guardado difiere.");
@@ -172,7 +170,7 @@ public class ProductoDAOTest {
             boolean eliminado = ProductoDAO.eliminarProducto(idAsignado);
             assertTrue(eliminado, "El método eliminarProducto debió retornar true.");
 
-            // Comprobar que quedó vacía
+            // Comprobamos que quedó vacía
             ArrayList<Producto> vacio = ProductoDAO.obtenerProductos();
             assertEquals(0, vacio.size(), "El producto sigue apareciendo en la base de datos.");
             
@@ -210,7 +208,7 @@ public class ProductoDAOTest {
         }
     }
 
-    // === EJECUTOR PRINCIPAL MANUAL (MAIN) ===
+    // Ejecutamos las pruebas en main
     public static void main(String[] args) {
         System.out.println("=== INICIANDO PRUEBAS MANUALES DE PRODUCTODAO ===");
         int pruebasPasadas = 0;
