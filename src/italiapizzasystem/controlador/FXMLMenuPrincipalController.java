@@ -161,7 +161,7 @@ public class FXMLMenuPrincipalController implements Initializable {
                 "║  ♣ Gerardo Abraham Barrón Gómez ♣      ║\n" +
                 "║  ♕ Abraham Cano Ramírez ♕            ║\n" +
                 "║  ♣ Javier Yajseel Lily Reyes ♣         ║\n" +
-                "║  ♣ Leonardo [Apellido] ♣               ║\n" +
+                "║  ♣ Leonardo Hernández Hernández ♣      ║\n" +
                 "╠════════════════════════════════════════╣\n" +
                 "║         📚 CARRERA EN CURSO            ║\n" +
                 "║     Ingeniería de Software             ║\n" +
